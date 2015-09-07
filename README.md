@@ -8,7 +8,7 @@ This project aims to
 * implements three main components of the pipline that:
   * read in and preprocess data from the TCGA project
   * analyze the data using at least one machine learning and one network-based method
-  * build a classifier that --- based on input data --- can distinguish two cohorts, e.g. "cancer vs. healthy" or "cancer sub-group A vs. cancer sub-group B" or similar
+  * build a classifier that &mdash; based on input data &mdash; can distinguish two cohorts, e.g. "cancer vs. healthy" or "cancer sub-group A vs. cancer sub-group B" or similar
 * run the pipeline on a flink cluster
 
 
