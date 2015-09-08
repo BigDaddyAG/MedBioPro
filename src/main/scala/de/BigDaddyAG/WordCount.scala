@@ -29,7 +29,7 @@ object WordCount {
     val env = ExecutionEnvironment.getExecutionEnvironment
     val text = getTextDataSet(env)
 
-    
+
     val counts = text.flatMap { _.toLowerCase.split("\\W+") filter { _.nonEmpty } }
       .map { (_, 1) }
       .groupBy(0)
