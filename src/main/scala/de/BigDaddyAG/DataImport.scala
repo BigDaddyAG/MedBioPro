@@ -23,8 +23,9 @@ import org.apache.flink.api.scala._
 object DataImport {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
-    val text = env.readTextFile("")
+    val text = env.readTextFile("data/unc.edu_LUAD.AgilentG4502A_07_3.Level_3.1.1.0/US82800149_251976011596_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
   }
+
 }
 
 
