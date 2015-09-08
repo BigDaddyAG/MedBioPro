@@ -25,6 +25,7 @@ object WordCount {
       return
     }
 
+    
     val env = ExecutionEnvironment.getExecutionEnvironment
     val text = getTextDataSet(env)
 
