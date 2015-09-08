@@ -24,6 +24,7 @@ object DataImport {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
     val text = env.readTextFile("data/unc.edu_LUAD.AgilentG4502A_07_3.Level_3.1.1.0/US82800149_251976011596_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
+    val text1 = env.readCsvFile("data/unc.edu_LUAD.AgilentG4502A_07_3.Level_3.1.1.0/US82800149_251976011661_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt", fieldDelimiter = "\t")
   }
 }
 
