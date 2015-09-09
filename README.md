@@ -1,4 +1,4 @@
-# MedBioProject
+# MBPro aka Medical Bioinformatics Project
 
 #### This is the GitHub page for the project done during the Summer Term's course of Medical Bioinformatics at the Freie Universität Berlin.
 
