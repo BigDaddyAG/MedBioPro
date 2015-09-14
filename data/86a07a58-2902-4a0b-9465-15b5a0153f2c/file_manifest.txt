@@ -1,0 +1,26 @@
+Platform Type	Center	Platform	Level	Sample	Barcode	File Name
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	genome.wustl.edu_biospecimen_aliquot_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	genome.wustl.edu_biospecimen_analyte_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	genome.wustl.edu_biospecimen_cqcf_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	genome.wustl.edu_biospecimen_diagnostic_slides_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	genome.wustl.edu_biospecimen_portion_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	genome.wustl.edu_biospecimen_protocol_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	genome.wustl.edu_biospecimen_sample_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_biospecimen_aliquot_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_biospecimen_analyte_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_biospecimen_cqcf_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_biospecimen_diagnostic_slides_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_biospecimen_normal_control_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_biospecimen_portion_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_biospecimen_protocol_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_biospecimen_sample_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_biospecimen_shipment_portion_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_biospecimen_slide_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_biospecimen_tumor_sample_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_clinical_cqcf_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_clinical_drug_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_clinical_follow_up_v1.0_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_clinical_nte_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_clinical_omf_v4.0_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_clinical_patient_luad.txt
+Clinical	Biotab	n/a	n/a	selected_samples	N/A	nationwidechildrens.org_clinical_radiation_luad.txt
