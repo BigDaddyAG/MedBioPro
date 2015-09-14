@@ -18,8 +18,6 @@
 package de.BigDaddyAG
 
 import org.apache.flink.api.scala._
-import org.eclipse.jetty.security.Authenticator.Configuration
-import org.uncommons.maths.statistics.DataSet
 
 
 object DataImport {
@@ -33,19 +31,16 @@ object DataImport {
     */
 
     // enable recursive enumeration of nested input files
-    val env = ExecutionEnvironment.getExecutionEnvironment;
+    val env = ExecutionEnvironment.getExecutionEnvironment
 
-    // create a configuration object
-    val parameters = new Configuration
+    //https://ci.apache.org/projects/flink/flink-docs-master/apis/programming_guide.html#execution-configuration
 
-    // set the recursive enumeration parameter
-    parameters.setBoolean("recursive.file.enumeration", true)
+    val data = env.readTextFile("/Users/Zarin/Documents/Uni/BigDaddy/MBPro/data/GCC")
 
-    // pass the configuration to the data source
-    env.readTextFile("data").withParameters(parameters)
+     data.writeAsText("/Users/Zarin/Documents/Uni/BigDaddy/MBPro/data/output")
 
 
-
+    env.execute();
   }
 }
 
