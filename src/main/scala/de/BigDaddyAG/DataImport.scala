@@ -21,12 +21,30 @@ import org.apache.flink.api.scala._
 
 
 object DataImport {
-  def main(args: Array[String]): Unit = {
+  def main(args: Array[String]) {
+
+    /*
     val env = ExecutionEnvironment.getExecutionEnvironment
     val text = env.readTextFile("data/unc.edu_LUAD.AgilentG4502A_07_3.Level_3.1.1.0/US82800149_251976011596_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
     val text1 = env.readCsvFile("data/unc.edu_LUAD.AgilentG4502A_07_3.Level_3.1.1.0/US82800149_251976011661_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt", fieldDelimiter = "\t")
     val text2 = env.readCsvFile("data/unc.edu_LUAD.AgilentG4502A_07_3.Level_3.1.1.0/US82800149_251976011662_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
+    */
+
+    // enable recursive enumeration of nested input files
+    ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+
+    // create a configuration object
+    Configuration parameters = new Configuration();
+
+    // set the recursive enumeration parameter
+    parameters.setBoolean("recursive.file.enumeration", true);
+
+    // pass the configuration to the data source
+    DataSet<String> logs = env.readTextFile("file:///path/with.nested/files")
+      .withParameters(parameters);
+
+
+
   }
 }
-
 
