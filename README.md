@@ -1,5 +1,7 @@
 # MedBioPro aka Medical Bioinformatics Project
 
+---
+
 #### This is the GitHub page for the project done during the Summer Term's course of Medical Bioinformatics at the Freie Universität Berlin.
 
 ---
@@ -12,6 +14,7 @@
   * build a classifier that &mdash; based on input data &mdash; can distinguish two cohorts, e.g. "cancer vs. healthy" or "cancer sub-group A vs. cancer sub-group B" or similar
 * run the pipeline on a flink cluster
 
+----
 
 ##### Quick Install Guide
 * `git clone https://github.com/BigDaddyAG/MedBioPro`
