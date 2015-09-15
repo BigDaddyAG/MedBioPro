@@ -12,5 +12,10 @@ This project aims to
 * run the pipeline on a flink cluster
 
 
-
+#### Quick Install Guide
+* git clone https://github.com/BigDaddyAG/MedBioPro
+* open IntelliJ and select "Import Project" from start window
+* switch to folder that contains the "pom.xml" file and follow the guided import
+* after indexing you should be able to see (and compile) the files located at "src/main/scala/de.BigDaddyAG"
+* have fun!
 
