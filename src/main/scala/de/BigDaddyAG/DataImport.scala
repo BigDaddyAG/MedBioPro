@@ -24,9 +24,14 @@ import org.apache.flink.api.scala.table._
 import java.io.File
 
 // Define a class describing the "items" (lines) in your CSV file
-case class MyLineitem(col1: Int, col2: Int, col3: String)
+case class MyLineitem(col1: String, col2: String)
 
 object DataImport {
+
+
+  // define file path where GCC data (transcriptomes) is stored
+  val dataGCCFilePath = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/"
+  //val dataGCCFilePath = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC"
 
 
   // Let your main method call the actual method to read in the data and perform some select statement
@@ -35,6 +40,7 @@ object DataImport {
     // enable recursive enumeration of nested input files
     val env = ExecutionEnvironment.getExecutionEnvironment
 
+    // function to list all files in a directory
     def getListOfFiles(dir: String):List[File] = {
       val d = new File(dir)
       if (d.exists && d.isDirectory) {
@@ -43,21 +49,26 @@ object DataImport {
         List[File]()
       }
     }
-    val files = getListOfFiles("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC")
+
+    // extract the filename of absolute path to file and print it
+    val files = getListOfFiles(dataGCCFilePath)
     val filenameArray = files.toString.split(",")
-    val sizeOfArray = filenameArray.size
-    for (i <- 0 to sizeOfArray-1) {
-      val lineArray = filenameArray(i).split("/")
-      val sizeOfLine = lineArray.size
-      println(lineArray(sizeOfLine-1))
-    }
+    val sizeOfFilenameArray = filenameArray.size
+//    for (i <- 0 to sizeOfFilenameArray-1) {
+//      val lineArray = filenameArray(i).split("/")
+//      val sizeOfLine = lineArray.size
+//      println(lineArray(sizeOfLine-1))
+//    }
 
 
-    val allColumns = readMyDataSet(env, Array(0, 1)).as( 'col1, 'col2)
 
-    while () {
+    //val allColumns = readMyDataSet(env, Array(0, 1)).as( 'col1, 'col2)
+
+    for (i <- 0 to sizeOfFilenameArray-1) {
+      //println(filenameArray(i))
+
       // Read a file but only includes the 1st, 2nd column - returns DataSet[MyLineitem]
-      val lineItems = readMyDataSet(env, Array(0, 1)).as('col1, 'col2)
+      val lineItems = readMyDataSet(env, Array(0, 1), filenameArray(i)).as('col1, 'col2)
 
       // Select only 'col1' and 'col2' from those lines where...
       val currentColumn = lineItems
@@ -66,22 +77,18 @@ object DataImport {
         //      .where('col1 !== "x") // value of col3 is not "x"
         .select('col2)
 
-      val Result =
-        allColumns.join(currentColumn)
+      println(currentColumn.toString)
     }
+
 
 
   }
 
   // This method reads all rows but only selected columns from a file and returns a dataset
-  def readMyDataSet(env: ExecutionEnvironment, includedCols: Array[Int]): DataSet[MyLineitem] = {
-
-    // define file path where GCC data (transcriptomes) are stored
-    //val dataGCCFilePath = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/"
-    val dataGCCFilePath = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC"
+  def readMyDataSet(env: ExecutionEnvironment, includedCols: Array[Int], path: String): DataSet[MyLineitem] = {
 
     env.readCsvFile[MyLineitem] (
-      dataGCCFilePath,
+      path,
       fieldDelimiter = "\t",
       includedFields = includedCols )
   }
