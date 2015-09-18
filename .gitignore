@@ -1,2 +1,5 @@
 target
 .idea
+.DS_Store
+data/output*
+data/GCC/output*
