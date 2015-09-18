@@ -18,6 +18,7 @@
 package de.BigDaddyAG
 
 
+import breeze.linalg.Axis._1
 import org.apache.flink.api.scala._
 // Important: include the TABLE API import
 import org.apache.flink.api.scala.table._
@@ -30,12 +31,12 @@ object DataImport {
 
 
   // define file path where GCC data (transcriptomes) is stored
-  val dataGCCFilePath = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/"
-  //val dataGCCFilePath = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC"
+  //val dataGCCFilePath = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/"
+  val dataGCCFilePath = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC"
 
 
   // Let your main method call the actual method to read in the data and perform some select statement
-  def main(args: Array[String]): Unit = {
+  def main(args: Array[String]){
 
     // enable recursive enumeration of nested input files
     val env = ExecutionEnvironment.getExecutionEnvironment
@@ -62,13 +63,15 @@ object DataImport {
 
 
 
-    //val allColumns = readMyDataSet(env, Array(0, 1)).as( 'col1, 'col2)
+   // val allColumns = readMyDataSet(env, Array(0, 1), filenameArray(0)).as( 'col1, 'col2)
 
     for (i <- 0 to sizeOfFilenameArray-1) {
-      //println(filenameArray(i))
 
       // Read a file but only includes the 1st, 2nd column - returns DataSet[MyLineitem]
       val lineItems = readMyDataSet(env, Array(0, 1), filenameArray(i)).as('col1, 'col2)
+      lineItems.toString().foreach(println)
+      //test.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC")
+      //allColumns.join(lineItems.select('col2))
 
       // Select only 'col1' and 'col2' from those lines where...
       val currentColumn = lineItems
@@ -77,10 +80,13 @@ object DataImport {
         //      .where('col1 !== "x") // value of col3 is not "x"
         .select('col2)
 
-      println(currentColumn.toString)
+
+      val test = currentColumn.toString
+      //println(test)
+
     }
 
-
+    //allColumns.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/output/")
 
   }
 
@@ -91,6 +97,7 @@ object DataImport {
       path,
       fieldDelimiter = "\t",
       includedFields = includedCols )
+
   }
 
 }
