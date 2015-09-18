@@ -2,8 +2,9 @@
 
 #### This is the GitHub page for the project done during the Summer Term's course of Medical Bioinformatics at the Freie Universität Berlin.
 
+---
 
-This project aims to
+##### This project aims to
 * build a workflow / pipelaine based on Apache Flink to analyze data from TCGA
 * implements three main components of the pipline that:
   * read in and preprocess data from the TCGA project
@@ -12,5 +13,10 @@ This project aims to
 * run the pipeline on a flink cluster
 
 
-
+##### Quick Install Guide
+* `git clone https://github.com/BigDaddyAG/MedBioPro`
+* open IntelliJ and select "Import Project" from start window
+* switch to folder that contains the "pom.xml" file and follow the guided import
+* after indexing you should be able to see (and compile) the files located at `src/main/scala/de.BigDaddyAG`
+* have fun!
 
