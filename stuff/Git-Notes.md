@@ -2,7 +2,7 @@
 
 #### Procedure of adding new changes to a file in the Github repository
 `$ git add <file>`  
-`$ git commit -m "Commit message (use present tense)"`
+`$ git commit -m "Commit message (use present tense)"`  
 `$ git push`
 
 
