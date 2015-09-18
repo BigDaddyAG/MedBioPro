@@ -6,7 +6,8 @@
 `$ git push`
 
 
-#### In case of a conflict: revert local changes and pull origin from master
+#### In case of a conflict:
+* ##### revert local changes and pull origin from master
 `$ git reset --merge`  
 `$ git pull`
 
