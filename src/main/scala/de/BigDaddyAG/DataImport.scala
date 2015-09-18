@@ -17,30 +17,44 @@
  */
 package de.BigDaddyAG
 
-import org.apache.flink.api.scala._
 
+import org.apache.flink.api.scala._
+// Important: include the TABLE API import
+import org.apache.flink.api.scala.table._
+
+// Define a class describing the "items" (lines) in your CSV file
+case class MyLineitem(col1: Int, col2: Int, col3: String)
 
 object DataImport {
-  def main(args: Array[String]) {
 
-    /*
-    val env = ExecutionEnvironment.getExecutionEnvironment
-    val text = env.readTextFile("data/unc.edu_LUAD.AgilentG4502A_07_3.Level_3.1.1.0/US82800149_251976011596_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
-    val text1 = env.readCsvFile("data/unc.edu_LUAD.AgilentG4502A_07_3.Level_3.1.1.0/US82800149_251976011661_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt", fieldDelimiter = "\t")
-    val text2 = env.readCsvFile("data/unc.edu_LUAD.AgilentG4502A_07_3.Level_3.1.1.0/US82800149_251976011662_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
-    */
+
+  // Let your main method call the actual method to read in the data and perform some select statement
+  def main(args: Array[String]): Unit = {
 
     // enable recursive enumeration of nested input files
     val env = ExecutionEnvironment.getExecutionEnvironment
 
-    //https://ci.apache.org/projects/flink/flink-docs-master/apis/programming_guide.html#execution-configuration
+    // Read a file but only includes the 1st, 2nd & 4th column (index is 0-based!) - returns DataSet[MyLineitem]
+    val lineItems = readMyDataSet(env, Array(0, 1, 3)).as( 'col1, 'col2, 'col3 )
 
-    val data = env.readTextFile("/Users/Zarin/Documents/Uni/BigDaddy/MBPro/data/GCC")
-
-     data.writeAsText("/Users/Zarin/Documents/Uni/BigDaddy/MBPro/data/output")
-
-
-    env.execute();
+    // Select only 'col1' and 'col2' from those lines where...
+    val selectedItems = lineItems
+      .where('col1 < 10) // value of the first column is less than 10
+      .where('col1 !== 'col2) // values of col1 and col2 are different
+      .where('col3 !== "x") // value of col3 is not "x"
+      .select('col1, 'col2)
   }
-}
 
+  // This method reads all rows but only selected columns from a file and returns a dataset
+  def readMyDataSet(env: ExecutionEnvironment, includedCols: Array[Int]): DataSet[MyLineitem] = {
+
+    // define file path where GCC data (transcriptomes) are stored
+    val dataGCCFilePath = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/"
+
+    env.readCsvFile[MyLineitem] (
+      dataGCCFilePath,
+      fieldDelimiter = "\t",
+      includedFields = includedCols )
+  }
+
+}
