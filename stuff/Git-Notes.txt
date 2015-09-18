@@ -1,0 +1,12 @@
+
+Conflict.revert local changes and pull origin from master.
+-git reset --merge
+-git pull
+
+-Git status
+-Git log
+
+save local changes to stash 
+-git stash
+
+-git stash pop
