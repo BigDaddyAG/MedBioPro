@@ -1,7 +1,7 @@
 # Git-Notes
 
 #### In case of a conflict: revert local changes and pull origin from master
-`$ git reset --merge`
+`$ git reset --merge`--
 `$ git pull`
 
 #### Save local changes to a stash stack in ordner to not push them to the master
@@ -12,7 +12,7 @@
 
 
 #### Other self-explaining commands
-`$ git status`
+`$ git status`--
 `$ git log`
 
 
