@@ -13,7 +13,7 @@
 
 
 #### Other self-explaining commands
-`$ git status`
+`$ git status`  
 `$ git log`
 
 
