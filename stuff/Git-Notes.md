@@ -10,6 +10,9 @@
 * Revert local changes and pull origin from master
 `$ git reset --merge`  
 `$ git pull`
+-or-
+`$ git reset HEAD` to unstage
+`$ git pull`
 
 * Save local changes to a stash stack in ordner to not push them to the master
 `$ git stash`
