@@ -7,7 +7,7 @@
 
 
 #### In case of a conflict:
-* Revert local changes and pull origin from master
+* Revert local changes and pull origin from master  
 `$ git checkout -- <file>...` to discard changes in the working directory
 `$ git reset HEAD` to unstage
 `$ git reset --merge` to reset the index and update the files in the working directory
