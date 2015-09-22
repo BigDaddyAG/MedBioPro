@@ -20,7 +20,9 @@ package de.BigDaddyAG
 
 import breeze.linalg.Axis._1
 import org.apache.flink.api.scala._
+
 // Important: include the TABLE API import
+
 import org.apache.flink.api.scala.table._
 import java.io.File
 
@@ -32,8 +34,8 @@ object DataImport {
 
   // define file path where GCC data (transcriptomes) is stored
   //val dataGCCFilePath = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/"
-  val dataGCCFilePath = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC"
-
+  val dataGCCFilePath = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/"
+ // val path = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/"
 
   // Let your main method call the actual method to read in the data and perform some select statement
   def main(args: Array[String]){
@@ -42,7 +44,7 @@ object DataImport {
     val env = ExecutionEnvironment.getExecutionEnvironment
 
     // function to list all files in a directory
-    def getListOfFiles(dir: String):List[File] = {
+    def getListOfFiles(dir: String): List[File] = {
       val d = new File(dir)
       if (d.exists && d.isDirectory) {
         d.listFiles.filter(_.isFile).toList
@@ -51,52 +53,94 @@ object DataImport {
       }
     }
 
+
     // extract the filename of absolute path to file and print it
     val files = getListOfFiles(dataGCCFilePath)
     val filenameArray = files.toString.split(",")
     val sizeOfFilenameArray = filenameArray.size
-//    for (i <- 0 to sizeOfFilenameArray-1) {
-//      val lineArray = filenameArray(i).split("/")
-//      val sizeOfLine = lineArray.size
-//      println(lineArray(sizeOfLine-1))
-//    }
+    //println(filenameArray(2))
 
-
-
-   // val allColumns = readMyDataSet(env, Array(0, 1), filenameArray(0)).as( 'col1, 'col2)
-
-    for (i <- 0 to sizeOfFilenameArray-1) {
-
-      // Read a file but only includes the 1st, 2nd column - returns DataSet[MyLineitem]
-      val lineItems = readMyDataSet(env, Array(0, 1), filenameArray(i)).as('col1, 'col2)
-      lineItems.toString().foreach(println)
-      //test.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC")
-      //allColumns.join(lineItems.select('col2))
-
-      // Select only 'col1' and 'col2' from those lines where...
-      val currentColumn = lineItems
-        //      .where('col1 < 10) // value of the first column is less than 10
-        //      .where('col1 !== 'col2) // values of col1 and col2 are different
-        //      .where('col1 !== "x") // value of col3 is not "x"
-        .select('col2)
-
-
-      val test = currentColumn.toString
-      //println(test)
+    val fileNames  =  filenameArray.toArray
+    for (i <- 0 to fileNames.size-1) {
+      println(fileNames(i))
 
     }
 
-    //allColumns.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/output/")
+    //    for (i <- 0 to sizeOfFilenameArray-1) {
+    //      val lineArray = filenameArray(i).split("/")
+    //      val sizeOfLine = lineArray.size
+    //      println(lineArray(sizeOfLine-1))
+    //    }
+
+/*   val firstFile =
+      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011596_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
+        .as('f1col1, 'f1col2)
+
+    val secondFile =
+      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011662_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
+        .as('f2col1, 'f2col2)
+
+    val items =
+      firstFile.join(secondFile)
+        .where('f1col1 === 'f2col1)
+        .select('f1col1, 'f1col2, 'f2col2)
+
+
+    items.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/output", "\t", "\n")*/
+
+
+    val firstFile = getDataSetFile(env,filenameArray(1)).as('firstFileCol1, 'firstFileCol2)
+    for (i <- 2 to filenameArray.size-2) {
+
+     // val COl = i+"col1"
+
+       // Read a file but only includes the 1st, 2nd column - returns DataSet[MyLineitem]
+       val CurrentFile = getDataSetFile(env,filenameArray(i)).as('col1, 'col2)
+
+      val items =
+        firstFile.join(CurrentFile)
+          .where('firstFileCol1 === 'col1)
+          .select('firstFileCol1, 'firstFileCol2, 'col2)
+
+     }
+
+    items.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/output", "\t", "\n")
+
+
+    env.execute("Join")
 
   }
 
   // This method reads all rows but only selected columns from a file and returns a dataset
-  def readMyDataSet(env: ExecutionEnvironment, includedCols: Array[Int], path: String): DataSet[MyLineitem] = {
-
-    env.readCsvFile[MyLineitem] (
+  private def getDataSetFile(env: ExecutionEnvironment, path:String): DataSet[MyLineitem] = {
+    env.readCsvFile[MyLineitem](
       path,
       fieldDelimiter = "\t",
-      includedFields = includedCols )
+      includedFields = Array(0, 1))
+
+  }
+
+/*
+  // This method reads all rows but only selected columns from a file and returns a dataset
+  private def readMyDataSet(env: ExecutionEnvironment): DataSet[MyLineitem] = {
+    env.readCsvFile[MyLineitem](
+      path,
+      fieldDelimiter = "\t",
+      includedFields = Array(0, 1))
+
+  }
+*/
+
+
+
+
+
+  // This method reads all rows but only selected columns from a file and returns a dataset
+ private def readMyDataSet(env: ExecutionEnvironment, includedCols: Array[Int], path: String): DataSet[MyLineitem] = {
+    env.readCsvFile[MyLineitem](
+      path,
+      fieldDelimiter = "\t",
+      includedFields = includedCols)
 
   }
 
