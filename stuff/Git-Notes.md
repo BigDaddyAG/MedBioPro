@@ -12,10 +12,10 @@
 `$ git reset HEAD` to unstage  
 `$ git reset --merge` to reset the index and update the files in the working directory
 
-* Save local changes to a stash stack in ordner to not push them to the master
+* Save local changes to a stash stack in ordner to not push them to the master  
 `$ git stash`
 
-* Remove a single stashed state from the stash stack and apply it on top of the current working tree state
+* Remove a single stashed state from the stash stack and apply it on top of the current working tree state  
 `$ git stash pop`
 
 
