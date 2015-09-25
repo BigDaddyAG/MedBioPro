@@ -22,6 +22,6 @@
 #### Other self-explaining commands
 `$ git status`  
 `$ git log`
-
+`$ git add -u` update all tracked files in the entire working tree
 
 
