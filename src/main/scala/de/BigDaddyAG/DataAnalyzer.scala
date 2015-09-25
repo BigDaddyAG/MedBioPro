@@ -17,106 +17,59 @@
  */
 package de.BigDaddyAG
 
-
-import breeze.linalg.Axis._1
 import org.apache.flink.api.scala._
 
-// Important: include the TABLE API import
-
-import org.apache.flink.api.scala.table._
-import java.io.File
-
 // Define a class describing the "items" (lines) in your CSV file
-case class TcgaData(col1: String, col2: String, col3: String, col4: String, col5: String, col6: String,
-                    col7: String, col8: String, col9: String, col10: String, col11: String, col12: String,
-                    col13: String, col14: String, col15: String, col16: String)
+case class GccData(col0: String, col1: String, col2: String, col3: String, col4: String, col5: String, col6: String,
+                   col7: String, col8: String, col9: String, col10: String, col11: String, col12: String,
+                   col13: String, col14: String, col15: String, col16: String)
 
 
 object DataAnalyzer {
 
-  val gccFilePath = "Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/All"
-  // val path = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/"
+  def main(args: Array[String]) {
 
-  def main(args: Array[String]){
+    val gccFilePath = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/All/allGccDataClean.csv"
+    // val path = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/"
 
     // enable recursive enumeration of nested input files
     val env = ExecutionEnvironment.getExecutionEnvironment
 
-    val gccData = env.readCsvFile("file:///" + gccFilePath)
+    val gccData = env.readCsvFile[GccData] (
+      gccFilePath,
+      fieldDelimiter = ",",
+      includedFields = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
+    )
 
+    //gccData.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output")
 
-
-
-
-
-
-
-
-
-
-
-    // OLD STUFF
     /*
+     * let's get inspired by the following code...
 
-    // function to list all files in a directory
-    def getListOfFiles(dir: String): List[File] = {
-      val d = new File(dir)
-      if (d.exists && d.isDirectory) {
-        d.listFiles.filter(_.isFile).toList
-      } else {
-        List[File]()
-      }
-    }
+    // Training data
+    val input: DataSet[LabeledVector] = ...
+    // Test data
+    val unlabeled: DataSet[Vector] = ...
 
+    val scaler = StandardScaler()
+    val polyFeatures = PolynomialFeatures()
+    val mlr = MultipleLinearRegression()
 
-    // extract the filename of absolute path to file and print it
-    val files = getListOfFiles(gccFilePath)
-    val filenameArray = files.toString.split(",")
-    val sizeOfFilenameArray = filenameArray.size
-    //println(filenameArray(2))
+    // Construct the pipeline
+    val pipeline = scaler
+      .chainTransformer(polyFeatures)
+      .chainPredictor(mlr)
 
-    val fileNames = filenameArray.toArray
-    for (i <- 0 to fileNames.size-1) {
-      println(fileNames(i))
+    // Train the pipeline (scaler and multiple linear regression)
+    pipeline.fit(input)
 
-    }
+    // Calculate predictions for the testing data
+    val predictions: DataSet[LabeledVector] = pipeline.predict(unlabeled)
 
-    //    for (i <- 0 to sizeOfFilenameArray-1) {
-    //      val lineArray = filenameArray(i).split("/")
-    //      val sizeOfLine = lineArray.size
-    //      println(lineArray(sizeOfLine-1))
-    //    }
-
-    /*   val firstFile =
-          getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011596_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
-            .as('f1col1, 'f1col2)
-
-        val secondFile =
-          getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011662_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
-            .as('f2col1, 'f2col2)
-
-        val items =
-          firstFile.join(secondFile)
-            .where('f1col1 === 'f2col1)
-            .select('f1col1, 'f1col2, 'f2col2)
+    */
 
 
-        items.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/output", "\t", "\n")*/
-
-
-
-    env.execute("Join")
+    env.execute("Make it run!!1!")
 
   }
-
-  // This method reads all rows but only selected columns from a file and returns a dataset
-  private def getGccData(env: ExecutionEnvironment, path:String): DataSet[TcgaData] = {
-    env.readCsvFile[TcgaData](
-      path,
-      fieldDelimiter = "\t",
-      includedFields = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16))
-
-  }
-
-
 }
