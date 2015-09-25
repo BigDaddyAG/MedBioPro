@@ -34,7 +34,7 @@ object DataImport {
 
   // define file path where GCC data (transcriptomes) is stored
   //val dataGCCFilePath = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/"
-  val dataGCCFilePath = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/"
+ // val dataGCCFilePath = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/"
  // val path = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/"
 
   // Let your main method call the actual method to read in the data and perform some select statement
@@ -44,27 +44,27 @@ object DataImport {
     val env = ExecutionEnvironment.getExecutionEnvironment
 
     // function to list all files in a directory
-    def getListOfFiles(dir: String): List[File] = {
+   /* def getListOfFiles(dir: String): List[File] = {
       val d = new File(dir)
       if (d.exists && d.isDirectory) {
         d.listFiles.filter(_.isFile).toList
       } else {
         List[File]()
       }
-    }
+    }*/
 
 
     // extract the filename of absolute path to file and print it
-    val files = getListOfFiles(dataGCCFilePath)
+    /*val files = getListOfFiles(dataGCCFilePath)
     val filenameArray = files.toString.split(",")
-    val sizeOfFilenameArray = filenameArray.size
+    val sizeOfFilenameArray = filenameArray.size*/
     //println(filenameArray(2))
 
-    val fileNames  =  filenameArray.toArray
+  /*  val fileNames  =  filenameArray.toArray
     for (i <- 0 to fileNames.size-1) {
       println(fileNames(i))
 
-    }
+    }*/
 
     //    for (i <- 0 to sizeOfFilenameArray-1) {
     //      val lineArray = filenameArray(i).split("/")
@@ -72,13 +72,17 @@ object DataImport {
     //      println(lineArray(sizeOfLine-1))
     //    }
 
-/*   val firstFile =
-      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011596_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
+   val firstFile =
+      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011662_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
         .as('f1col1, 'f1col2)
+     //getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011596_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
+
 
     val secondFile =
-      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011662_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
+      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011663_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
         .as('f2col1, 'f2col2)
+     // getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011661_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
+
 
     val items =
       firstFile.join(secondFile)
@@ -86,10 +90,10 @@ object DataImport {
         .select('f1col1, 'f1col2, 'f2col2)
 
 
-    items.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/output", "\t", "\n")*/
+    items.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/out6", "\n", "|")
 
-
-    val firstFile = getDataSetFile(env,filenameArray(1)).as('firstFileCol1, 'firstFileCol2)
+    //val items = getDataSetFile(env,filenameArray(1)).as('firstFileCol1, 'firstFileCol2)
+   /* val firstFile = getDataSetFile(env,filenameArray(1)).as('firstFileCol1, 'firstFileCol2)
     for (i <- 2 to filenameArray.size-2) {
 
      // val COl = i+"col1"
@@ -100,11 +104,11 @@ object DataImport {
       val items =
         firstFile.join(CurrentFile)
           .where('firstFileCol1 === 'col1)
-          .select('firstFileCol1, 'firstFileCol2, 'col2)
+          .select(, 'col2)
 
-     }
+    }
+    items.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/output", "\n", "\t")*/
 
-    items.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/output", "\t", "\n")
 
 
     env.execute("Join")
@@ -136,12 +140,12 @@ object DataImport {
 
 
   // This method reads all rows but only selected columns from a file and returns a dataset
- private def readMyDataSet(env: ExecutionEnvironment, includedCols: Array[Int], path: String): DataSet[MyLineitem] = {
+/* private def readMyDataSet(env: ExecutionEnvironment, includedCols: Array[Int], path: String): DataSet[MyLineitem] = {
     env.readCsvFile[MyLineitem](
       path,
       fieldDelimiter = "\t",
       includedFields = includedCols)
 
-  }
+  }*/
 
 }
