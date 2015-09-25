@@ -20,14 +20,14 @@ package de.BigDaddyAG
 
 import breeze.linalg.Axis._1
 import org.apache.flink.api.scala._
-
+import scala.io.Source
 // Important: include the TABLE API import
-
 import org.apache.flink.api.scala.table._
 import java.io.File
 
 // Define a class describing the "items" (lines) in your CSV file
-case class MyLineitem(col1: String, col2: String)
+case class MyLineitem(col1: String, col2: String, col3: String, col4: String, col5: String, col6: String, col7: String, col8: String , col9: String)
+//case class MyLineitem(col1: String, col2: String)
 
 object DataImport {
 
@@ -42,6 +42,14 @@ object DataImport {
 
     // enable recursive enumeration of nested input files
     val env = ExecutionEnvironment.getExecutionEnvironment
+
+
+
+
+
+
+
+
 
     // function to list all files in a directory
    /* def getListOfFiles(dir: String): List[File] = {
@@ -72,16 +80,13 @@ object DataImport {
     //      println(lineArray(sizeOfLine-1))
     //    }
 
-   val firstFile =
-      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011662_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
+  /*  val firstFile =
+      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC")
         .as('f1col1, 'f1col2)
-     //getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011596_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
-
 
     val secondFile =
-      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011663_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
+      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC")
         .as('f2col1, 'f2col2)
-     // getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/US82800149_251976011661_S01_GE2_105_Dec08.txt_lmean.out.logratio.gene.tcga_level3.data.txt")
 
 
     val items =
@@ -90,7 +95,23 @@ object DataImport {
         .select('f1col1, 'f1col2, 'f2col2)
 
 
-    items.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/out6", "\n", "|")
+    items.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/Output/", "\n", "\t").setParallelism(1)*/
+   val firstFile =
+      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/Output/jo1_8")
+        .as('f1col1, 'f1col2, 'f1col3, 'f1col4, 'f1col5, 'f1col6, 'f1col7, 'f1col8, 'f1col9)
+
+    val secondFile =
+      getDataSetFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/Output/jo9_16")
+        .as('f2col1, 'f2col2,'f2col3, 'f2col4, 'f2col5, 'f2col6, 'f2col7, 'f2col8, 'f2col9 )
+
+
+    val items =
+      firstFile.join(secondFile)
+        .where('f1col1 === 'f2col1)
+        .select('f1col1, 'f1col2, 'f1col3, 'f1col4, 'f1col5, 'f1col6, 'f1col7, 'f1col8, 'f1col9 , 'f2col2, 'f2col3, 'f2col4, 'f2col5, 'f2col6, 'f2col7, 'f2col8, 'f2col9)
+
+
+    items.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/All/allGccData.csv", "\n", ",").setParallelism(1)
 
     //val items = getDataSetFile(env,filenameArray(1)).as('firstFileCol1, 'firstFileCol2)
    /* val firstFile = getDataSetFile(env,filenameArray(1)).as('firstFileCol1, 'firstFileCol2)
@@ -120,7 +141,7 @@ object DataImport {
     env.readCsvFile[MyLineitem](
       path,
       fieldDelimiter = "\t",
-      includedFields = Array(0, 1))
+      includedFields = Array(0, 1, 2, 3 , 4, 5, 6, 7, 8))
 
   }
 
