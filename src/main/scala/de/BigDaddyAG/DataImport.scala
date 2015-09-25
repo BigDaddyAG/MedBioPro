@@ -17,8 +17,6 @@
  */
 package de.BigDaddyAG
 
-
-import breeze.linalg.Axis._1
 import org.apache.flink.api.scala._
 import scala.io.Source
 // Important: include the TABLE API import
@@ -28,6 +26,7 @@ import java.io.File
 // Define a class describing the "items" (lines) in your CSV file
 case class MyLineitem(col1: String, col2: String, col3: String, col4: String, col5: String, col6: String, col7: String, col8: String , col9: String)
 //case class MyLineitem(col1: String, col2: String)
+
 
 object DataImport {
 
@@ -124,7 +123,6 @@ object DataImport {
 
     }
     items.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/output", "\n", "\t")*/
-
 
 
     env.execute("Join")
