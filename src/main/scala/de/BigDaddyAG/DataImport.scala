@@ -41,12 +41,7 @@ object DataImport {
   def main(args: Array[String]){
 
     // enable recursive enumeration of nested input files
-    val env = ExecutionEnvironment.fromCollection()
-
-
-
-
-
+    val env = ExecutionEnvironment.getExecutionEnvironment
 
 
 
