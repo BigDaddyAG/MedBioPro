@@ -41,7 +41,7 @@ object DataImport {
   def main(args: Array[String]){
 
     // enable recursive enumeration of nested input files
-    val env = ExecutionEnvironment.getExecutionEnvironment
+    val env = ExecutionEnvironment.fromCollection()
 
     // function to list all files in a directory
     def getListOfFiles(dir: String): List[File] = {
