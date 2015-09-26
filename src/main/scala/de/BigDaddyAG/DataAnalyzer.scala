@@ -18,6 +18,10 @@
 package de.BigDaddyAG
 
 import org.apache.flink.api.scala._
+import org.apache.flink.ml.math.Vector
+import org.apache.flink.ml.common.LabeledVector
+import org.apache.flink.ml.classification.SVM
+import org.apache.flink.ml.RichExecutionEnvironment
 
 // Define a class describing the "items" (lines) in your CSV file
 case class GccData(col0: String, col1: String, col2: String, col3: String, col4: String, col5: String, col6: String,
@@ -29,6 +33,7 @@ object DataAnalyzer {
 
   def main(args: Array[String]) {
 
+    /*
     val gccFilePath = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/All/allGccDataClean.csv"
     // val path = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/"
 
@@ -40,7 +45,7 @@ object DataAnalyzer {
       fieldDelimiter = ",",
       includedFields = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
     )
-
+    */
     //gccData.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output")
 
     /*
@@ -67,6 +72,38 @@ object DataAnalyzer {
     val predictions: DataSet[LabeledVector] = pipeline.predict(unlabeled)
 
     */
+
+
+    /*
+     * Code from https://ci.apache.org/projects/flink/flink-docs-master/libs/ml/svm.html
+     *
+
+    import org.apache.flink.api.scala._
+    import org.apache.flink.ml.math.Vector
+    import org.apache.flink.ml.common.LabeledVector
+    import org.apache.flink.ml.classification.SVM
+    import org.apache.flink.ml.RichExecutionEnvironment
+    */
+    val pathToTrainingFile: String = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/All/allGccData.csv"
+    val pathToTestingFile: String = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/All/allGccDataClean.csv"
+    val env = ExecutionEnvironment.getExecutionEnvironment
+
+    // Read the training data set, from a LibSVM formatted file
+    val trainingDS: DataSet[LabeledVector] = env.readLibSVM(pathToTrainingFile)
+
+    // Create the SVM learner
+    val svm = SVM()
+      .setBlocks(10)
+
+    // Learn the SVM model
+    svm.fit(trainingDS)
+
+    // Read the testing data set
+    val testingDS: DataSet[Vector] = env.readLibSVM(pathToTestingFile).map(lv => lv.vector)
+
+    // Calculate the predictions for the testing data set
+    val predictionDS: DataSet[(Vector, Double)] = svm.predict(testingDS)
+
 
 
     env.execute("Make it run!!1!")
