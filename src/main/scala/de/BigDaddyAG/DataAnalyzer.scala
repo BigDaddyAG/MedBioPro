@@ -84,8 +84,10 @@ object DataAnalyzer {
     import org.apache.flink.ml.classification.SVM
     import org.apache.flink.ml.RichExecutionEnvironment
     */
-    val pathToTrainingFile: String = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/All/allGccData.csv"
-    val pathToTestingFile: String = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/All/allGccDataClean.csv"
+   // val pathToTrainingFile: String = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/All/allGccData.csv"
+    val pathToTrainingFile: String = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/GCC/"
+   // val pathToTestingFile: String = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/All/allGccDataClean.csv"
+    val pathToTestingFile: String ="/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/GCC/All/allGccDataClean.csv"
     val env = ExecutionEnvironment.getExecutionEnvironment
 
     // Read the training data set, from a LibSVM formatted file
@@ -103,7 +105,6 @@ object DataAnalyzer {
 
     // Calculate the predictions for the testing data set
     val predictionDS: DataSet[(Vector, Double)] = svm.predict(testingDS)
-
 
 
     env.execute("Make it run!!1!")
