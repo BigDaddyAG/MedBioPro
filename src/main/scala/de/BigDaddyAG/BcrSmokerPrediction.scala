@@ -28,6 +28,7 @@ case class SmokerStatus(smokerPatientBarcode: String, patientSmokerStatus: Strin
 
 object BcrSmokerPrediction {
 
+  
   def main(args: Array[String]) {
 
     // Zarin
