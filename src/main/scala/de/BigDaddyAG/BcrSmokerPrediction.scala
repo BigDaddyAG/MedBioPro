@@ -42,28 +42,30 @@ object BcrSmokerPrediction {
         .as('consentPatientBarcode, 'patientConsentStatus)
 
     val smokerStatusData =
-      readSmokerStatusData(env, smokerStatusFile, Array(1, 45))
-        .as('smokerPatientBarcode, 'patientSmokerStatus)
+      readSmokerStatusData(env, smokerStatusFile, Array(1, 43, 44, 45))
+        .as('smokerPatientBarcode, 'startedSmoking, 'stoppedSmoking, 'patientSmokerStatus)
 
-    val items =
+    val result =
       consentStatusData.join(smokerStatusData)
-        .where('consentPatientBarcode === 'smokerPatientBarcode)
-        .select('consentPatientBarcode, 'patientConsentStatus,'patientSmokerStatus )
+        .where('consentPatientBarcode === 'smokerPatientBarcode).where('startedSmoking != "[Not Available]").where('stoppedSmoking != "[Not Available]")
+        .select('consentPatientBarcode, 'patientConsentStatus, 'patientSmokerStatus, 'stoppedSmoking - 'startedSmoking)
 
 
-    items.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/somkeOutput", "\n", "\t")
 
-          env.execute("Make it run!!1!")
+    result.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/somkeOutput.csv", "\n", ",").setParallelism(1)
+
+
+    env.execute("Make it run!!1!")
 
   }
 
 
   private def readConsentStatusData(env: ExecutionEnvironment, path: String, includedCols: Array[Int]): DataSet[ConsentStatus] = {
-    env.readCsvFile[ConsentStatus](path, fieldDelimiter = ",", includedFields = includedCols)
+    env.readCsvFile[ConsentStatus](path, fieldDelimiter = "\t", includedFields = includedCols)
   }
 
   private def readSmokerStatusData(env: ExecutionEnvironment, path: String, includedCols: Array[Int]): DataSet[ConsentStatus] = {
-    env.readCsvFile[ConsentStatus](path, fieldDelimiter = ",", includedFields = includedCols)
+    env.readCsvFile[ConsentStatus](path, fieldDelimiter = "\t", includedFields = includedCols)
   }
 
 

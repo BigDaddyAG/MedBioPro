@@ -24,9 +24,9 @@ import org.apache.flink.api.scala.table._
 import java.io.File
 
 // Define a class describing the "items" (lines) in your CSV file
-case class gccColumnItems(col1: String, col2: String, col3: String, col4: String, col5: String, col6: String, col7: String, col8: String , col9: String)
+//case class gccColumnItems(col1: String, col2: String, col3: String, col4: String, col5: String, col6: String, col7: String, col8: String , col9: String)
 //case class MyLineitem(col1: String, col2: String)
-case class bcrColumnItems(id: String, consentStatus: String)
+//case class bcrColumnItems(id: String, consentStatus: String)
 
 
 object DataPreprocessor {
