@@ -18,6 +18,7 @@
 package de.BigDaddyAG
 
 import org.apache.flink.api.scala._
+import org.apache.flink.api.scala.table._
 
 
 case class ConsentStatus(consentPatientBarcode: String, patientConsentStatus: String)
@@ -49,6 +50,8 @@ object BcrSmokerPrediction {
         .where('consentPatientBarcode === 'smokerPatientBarcode)
         .select('consentPatientBarcode, 'patientConsentStatus,'patientSmokerStatus )
 
+
+    items.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/somkeOutput", "\n", "\t")
 
           env.execute("Make it run!!1!")
 
