@@ -22,7 +22,7 @@ import org.apache.flink.api.scala.table._
 
 
 case class ConsentStatus(consentPatientBarcode: String, patientConsentStatus: String)
-case class smokerStatus(smokerPatientBarcode: String, patientSmokerStatus: String)
+case class SmokerStatus(smokerPatientBarcode: String, patientSmokerStatus: String, startedSmoking: Int, stoppedSmoking: Int)
 
 
 
@@ -67,7 +67,7 @@ object BcrSmokerPrediction {
     env.readCsvFile[ConsentStatus](path, fieldDelimiter = ",", includedFields = includedCols)
   }
 
-  private def readSmokerStatusData(env: ExecutionEnvironment, path: String, includedCols: Array[Int]): DataSet[ConsentStatus] = {
+  private def readSmokerStatusData(env: ExecutionEnvironment, path: String, includedCols: Array[Int]): DataSet[SmokerStatus] = {
     env.readCsvFile[ConsentStatus](path, fieldDelimiter = "\t", includedFields = includedCols)
   }
 
