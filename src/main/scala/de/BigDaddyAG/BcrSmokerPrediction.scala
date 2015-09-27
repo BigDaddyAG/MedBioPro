@@ -30,8 +30,10 @@ object BcrSmokerPrediction {
 
   def main(args: Array[String]) {
 
-    val consentStatusFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_biospecimen_cqcf_luad.txt"
-    val smokerStatusFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_clinical_patient_luad.txt"
+    // val consentStatusFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_biospecimen_cqcf_luad.txt"
+    val consentStatusFile = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_biospecimen_cqcf_luad.txt"
+    //val smokerStatusFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_clinical_patient_luad.txt"
+    val smokerStatusFile = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_clinical_patient_luad.txt"
 
     // enable recursive enumeration of nested input files
     val env = ExecutionEnvironment.getExecutionEnvironment
@@ -47,12 +49,13 @@ object BcrSmokerPrediction {
 
     val result =
       consentStatusData.join(smokerStatusData)
-        .where('consentPatientBarcode === 'smokerPatientBarcode).where('startedSmoking != "[Not Available]").where('stoppedSmoking != "[Not Available]")
+        .where('consentPatientBarcode === 'smokerPatientBarcode).where('startedSmoking && 'stoppedSmoking != "[Not Available]")
         .select('consentPatientBarcode, 'patientConsentStatus, 'patientSmokerStatus, 'stoppedSmoking - 'startedSmoking)
 
 
+    result.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/somkeOutput", "\n", "\t").setParallelism(1)
 
-    result.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/somkeOutput.csv", "\n", ",").setParallelism(1)
+   // result.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/somkeOutput.csv", "\n", ",").setParallelism(1)
 
 
     env.execute("Make it run!!1!")
@@ -61,7 +64,7 @@ object BcrSmokerPrediction {
 
 
   private def readConsentStatusData(env: ExecutionEnvironment, path: String, includedCols: Array[Int]): DataSet[ConsentStatus] = {
-    env.readCsvFile[ConsentStatus](path, fieldDelimiter = "\t", includedFields = includedCols)
+    env.readCsvFile[ConsentStatus](path, fieldDelimiter = ",", includedFields = includedCols)
   }
 
   private def readSmokerStatusData(env: ExecutionEnvironment, path: String, includedCols: Array[Int]): DataSet[ConsentStatus] = {
