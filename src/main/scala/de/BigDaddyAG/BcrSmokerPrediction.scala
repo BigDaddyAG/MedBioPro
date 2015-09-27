@@ -17,13 +17,13 @@
  */
 package de.BigDaddyAG
 
+import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.api.scala._
 import org.apache.flink.api.scala.table._
 
 
 case class ConsentStatus(consentPatientBarcode: String, patientConsentStatus: String)
-
-case class SmokerStatus(smokerPatientBarcode: String, patientSmokerStatus: String, startedSmoking: Int, stoppedSmoking: Int)
+case class SmokerStatus(smokerPatientBarcode: String, patientSmokerStatus: String, startedSmoking: String, stoppedSmoking: String)
 
 
 object BcrSmokerPrediction {
@@ -52,8 +52,9 @@ object BcrSmokerPrediction {
 
     val result =
       consentStatusData.join(smokerStatusData)
-        .where('consentPatientBarcode === 'smokerPatientBarcode).where('startedSmoking && 'stoppedSmoking != "[Not Available]")
-        .select('consentPatientBarcode, 'patientConsentStatus, 'patientSmokerStatus, 'stoppedSmoking - 'startedSmoking)
+        .where('consentPatientBarcode === 'smokerPatientBarcode).where("startedSmoking != '[Not Available]' && stoppedSmoking != '[Not Available]'")
+        .select('consentPatientBarcode, 'patientConsentStatus, 'patientSmokerStatus, 'stoppedSmoking.cast("INT") - 'startedSmoking.cast("INT"))
+        //{ (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, yearsSmoked) => (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, stoppedSmoking - startedSmoking) }
 
 
     // Zarin
@@ -72,7 +73,7 @@ object BcrSmokerPrediction {
   }
 
   private def readSmokerStatusData(env: ExecutionEnvironment, path: String, includedCols: Array[Int]): DataSet[SmokerStatus] = {
-    env.readCsvFile[ConsentStatus](path, fieldDelimiter = "\t", includedFields = includedCols)
+    env.readCsvFile[SmokerStatus](path, fieldDelimiter = "\t", includedFields = includedCols)
   }
 
 
