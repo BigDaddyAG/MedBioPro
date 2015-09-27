@@ -19,12 +19,15 @@ package de.BigDaddyAG
 
 import org.apache.flink.api.scala._
 import scala.io.Source
+
 // Important: include the TABLE API import
+
 import org.apache.flink.api.scala.table._
 import java.io.File
 
 // Define a class describing the "items" (lines) in your CSV file
-case class gccColumnItems(col1: String, col2: String, col3: String, col4: String, col5: String, col6: String, col7: String, col8: String , col9: String)
+case class gccColumnItems(col1: String, col2: String, col3: String, col4: String, col5: String, col6: String, col7: String, col8: String, col9: String)
+
 //case class MyLineitem(col1: String, col2: String)
 case class bcrColumnItems(id: String, consentStatus: String)
 
@@ -35,10 +38,10 @@ object DataImport {
   // define file path where GCC data (transcriptomes) is stored
   //val dataGCCFilePath = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/"
   //val dataGCCFilePath = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/"
-  //val path = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/"
+  // val path = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/GCC/"
 
   // Let your main method call the actual method to read in the data and perform some select statement
-  def main(args: Array[String]){
+  def main(args: Array[String]) {
 
     // enable recursive enumeration of nested input files
     val env = ExecutionEnvironment.getExecutionEnvironment
@@ -94,7 +97,7 @@ object DataImport {
     val gccFile =
       getGccFile(env, "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/GCC/All/allGccDataClean.csv")
         .as('f1col1, 'f1col2, 'f1col3, 'f1col4, 'f1col5, 'f1col6, 'f1col7, 'f1col8, 'f1col9, 'f1col9, 'f1col10,
-          'f1col11 , 'f1col12 , 'f1col13, 'f1col14, 'f1col15, 'f1col16, 'f1col17)
+          'f1col11, 'f1col12, 'f1col13, 'f1col14, 'f1col15, 'f1col16, 'f1col17)
     val bcrFile =
       getBcrFile(env, "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/BCR/Clinical/nationwidechildrens.org_biospecimen_cqcf_luad.txt")
         .as('id, 'consentStatus)
@@ -148,15 +151,15 @@ object DataImport {
   }
 
   // This method reads all rows but only selected columns from a file and returns a dataset
-  private def getGccFile(env: ExecutionEnvironment, path:String): DataSet[gccColumnItems] = {
+  private def getGccFile(env: ExecutionEnvironment, path: String): DataSet[gccColumnItems] = {
     env.readCsvFile[gccColumnItems](
       path,
       fieldDelimiter = "\t",
-      includedFields = Array(0, 1, 2, 3 , 4, 5, 6, 7, 8, 9 , 10 , 11, 12, 13, 14, 15, 16))
+      includedFields = Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16))
   }
 
   // This method reads all rows but only selected columns from a file and returns a dataset
-  private def getBcrFile(env: ExecutionEnvironment, path:String): DataSet[bcrColumnItems] = {
+  private def getBcrFile(env: ExecutionEnvironment, path: String): DataSet[bcrColumnItems] = {
     env.readCsvFile[bcrColumnItems](
       path,
       fieldDelimiter = "\t",

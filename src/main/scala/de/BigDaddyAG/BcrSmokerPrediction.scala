@@ -35,11 +35,15 @@ object BcrSmokerPrediction {
     // enable recursive enumeration of nested input files
     val env = ExecutionEnvironment.getExecutionEnvironment
 
-    val consentStatusData = env.readCsvFile[ConsentStatus] (
+/*    val smokeStatusData = env.readCsvFile[smokeStatus] (
       consentStatusFile,
       fieldDelimiter = ",",
-      includedFields = Array(1,12)
-    )
+      includedFields = Array(1, 45)
+    )*/
+
+    val gccFile =
+      readConsentStatusData(env, consentStatusFile, Array(1,3))
+        .as('bcrPatientStatus, 'patientConsentStatus)
 
 
     env.execute("Make it run!!1!")
@@ -47,11 +51,15 @@ object BcrSmokerPrediction {
   }
 
   // This method reads all rows but only selected columns from a file and returns a dataset
-  private def getGccFile(env: ExecutionEnvironment, path: String, fieldDelimiter: String, includedFields: String): DataSet[ConsentStatus] = {
+  private def readConsentStatusData(env: ExecutionEnvironment, path: String, fieldDelimiter: String, includedFields: String): DataSet[ConsentStatus] = {
     env.readCsvFile[gccColumnItems] (
       path,
       fieldDelimiter,
       includedFields )
+  }
+
+  private def readConsentStatusData(env: ExecutionEnvironment, path: String, includedCols: Array[Int]): DataSet[ConsentStatus] = {
+    env.readCsvFile[ConsentStatus](path, fieldDelimiter = ",", includedFields = includedCols)
   }
 
 
