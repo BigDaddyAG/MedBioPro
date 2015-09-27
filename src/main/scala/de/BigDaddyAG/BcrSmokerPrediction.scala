@@ -44,8 +44,13 @@ object BcrSmokerPrediction {
       readSmokerStatusData(env, smokerStatusFile, Array(1, 45))
         .as('smokerPatientBarcode, 'patientSmokerStatus)
 
-    
-    env.execute("Make it run!!1!")
+    val items =
+      consentStatusData.join(smokerStatusData)
+        .where('consentPatientBarcode === 'smokerPatientBarcode)
+        .select('consentPatientBarcode, 'patientConsentStatus,'patientSmokerStatus )
+
+
+          env.execute("Make it run!!1!")
 
   }
 
