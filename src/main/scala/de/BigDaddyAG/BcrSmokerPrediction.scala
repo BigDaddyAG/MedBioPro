@@ -22,8 +22,8 @@ import org.apache.flink.api.scala.table._
 
 
 case class ConsentStatus(consentPatientBarcode: String, patientConsentStatus: String)
-case class SmokerStatus(smokerPatientBarcode: String, patientSmokerStatus: String, startedSmoking: Int, stoppedSmoking: Int)
 
+case class SmokerStatus(smokerPatientBarcode: String, patientSmokerStatus: String, startedSmoking: Int, stoppedSmoking: Int)
 
 
 object BcrSmokerPrediction {
@@ -35,7 +35,7 @@ object BcrSmokerPrediction {
     //val smokerStatusFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_clinical_patient_luad.txt"
     val smokerStatusFile = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_clinical_patient_luad.txt"
 
-    // enable recursive enumeration of nested input files
+
     val env = ExecutionEnvironment.getExecutionEnvironment
 
 
@@ -53,9 +53,9 @@ object BcrSmokerPrediction {
         .select('consentPatientBarcode, 'patientConsentStatus, 'patientSmokerStatus, 'stoppedSmoking - 'startedSmoking)
 
 
-    result.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/somkeOutput", "\n", "\t").setParallelism(1)
+    //result.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/somkeOutput", "\n", "\t").setParallelism(1)
 
-   // result.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/somkeOutput.csv", "\n", ",").setParallelism(1)
+    result.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/somkeOutput.csv", "\n", ",").setParallelism(1)
 
 
     env.execute("Make it run!!1!")
