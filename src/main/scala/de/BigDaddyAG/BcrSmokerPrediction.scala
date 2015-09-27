@@ -38,12 +38,13 @@ object BcrSmokerPrediction {
 
     val consentStatusData =
       readConsentStatusData(env, consentStatusFile, Array(1, 3))
-        .as('bcrPatientStatus, 'patientConsentStatus)
+        .as('consentPatientBarcode, 'patientConsentStatus)
 
     val smokerStatusData =
-      readConsentSmokerData(env, smokerStatusFile, Array(1, 45))
-        .as('bcrPatientStatus, 'patientConsentStatus)
+      readSmokerStatusData(env, smokerStatusFile, Array(1, 45))
+        .as('smokerPatientBarcode, 'patientSmokerStatus)
 
+    
     env.execute("Make it run!!1!")
 
   }
