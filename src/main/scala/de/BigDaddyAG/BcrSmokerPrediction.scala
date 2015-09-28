@@ -26,6 +26,8 @@ import org.apache.flink.runtime.util.MathUtils
 case class ConsentStatus(consentPatientBarcode: String, patientConsentStatus: String)
 case class SmokerStatus(smokerPatientBarcode: String, startedSmoking: String, stoppedSmoking: String)
 //case class SmokerStatus(smokerPatientBarcode: String, numberPacksSmoked: String)
+case class JoinedDataClass(consentPatientBarcode: String, patientConsentStatus: String, startedSmoking: Int, stoppedSmoking: Int)
+case class FinalDataClass(id: String, status: String, yearsSmoked: Int)
 
 
 object BcrSmokerPrediction {
@@ -39,7 +41,7 @@ object BcrSmokerPrediction {
     // Stefan
     val consentStatusFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_biospecimen_cqcf_luad.txt"
     val smokerStatusFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_clinical_patient_luad.txt"
-
+    val joinedDataFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/somkeOutput.csv"
 
 
     val env = ExecutionEnvironment.getExecutionEnvironment
@@ -75,11 +77,32 @@ object BcrSmokerPrediction {
     //{ (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, yearsSmoked) => (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, stoppedSmoking - startedSmoking) }
     */
 
+
+    //val foo: DataSet[FinalDataClass] // do it like https://ci.apache.org/projects/flink/flink-docs-master/apis/dataset_transformations.html#join
+    /*
+    val joinedData =
+      readJoinedData(env, joinedDataFile, Array(0,1,2,3))
+        .as('id, 'status, 'stoppedSmoking, 'startedSmoking)
+
+    val joinedDataResult: DataSet[FinalDataClass] =
+      joinedData.select('id, 'status, 'stoppedSmoking, 'startedSmoking)
+      //{ ('id, 'status, 'yearsSmoked) => ('id, 'status, 'stoppedSmoking - 'startedSmoking) }
+      .as('id, 'status, 'stoppedSmoking - 'startedSmoking)
+    */
+/*
+    val joinedDataResult =
+      readJoinedData(env, joinedDataFile, Array(0,1,2,3))
+        .as('id, 'status, 'stoppedSmoking, 'startedSmoking)
+        .where('id, 'status, 'stoppedSmoking - 'startedSmoking)
+
+*/
+
     // Zarin
     //result.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/somkeOutput", "\n", "\t").setParallelism(1)
     // Stefan
     result.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/somkeOutput.csv", "\n", ",").setParallelism(1)
 
+    //joinedDataResult.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/joinedSomkeOutput.csv", "\n", ",").setParallelism(1)
 
     env.execute("Make it run!!1!")
 
@@ -94,5 +117,10 @@ object BcrSmokerPrediction {
     env.readCsvFile[SmokerStatus](path, fieldDelimiter = "\t", includedFields = includedCols)
   }
 
+  /*
+  private def readJoinedData(env: ExecutionEnvironment, path: String, includedCols: Array[Int]): DataSet[JoinedDataClass] = {
+    env.readCsvFile[JoinedDataClass](path, fieldDelimiter = "\t", includedFields = includedCols)
+  }
+*/
 
 }
