@@ -24,8 +24,8 @@ import org.apache.flink.runtime.util.MathUtils
 
 
 case class ConsentStatus(consentPatientBarcode: String, patientConsentStatus: String)
-//case class SmokerStatus(smokerPatientBarcode: String, patientSmokerStatus: String, startedSmoking: String, stoppedSmoking: String)
-case class SmokerStatus(smokerPatientBarcode: String, numberPacksSmoked: String)
+case class SmokerStatus(smokerPatientBarcode: String, startedSmoking: String, stoppedSmoking: String)
+//case class SmokerStatus(smokerPatientBarcode: String, numberPacksSmoked: String)
 
 
 object BcrSmokerPrediction {
@@ -49,18 +49,20 @@ object BcrSmokerPrediction {
       readConsentStatusData(env, consentStatusFile, Array(1, 3))
         .as('consentPatientBarcode, 'patientConsentStatus)
 
-    /* old version where we weren't able to cast to Int
+    // smokerStatusData based on years smoked
     val smokerStatusData =
-      readSmokerStatusData(env, smokerStatusFile, Array(1, 43, 44, 45))
-        .as('smokerPatientBarcode, 'startedSmoking, 'stoppedSmoking, 'patientSmokerStatus)
+      readSmokerStatusData(env, smokerStatusFile, Array(1, 43, 44))
+        .as('smokerPatientBarcode, 'startedSmoking, 'stoppedSmoking)
 
     val result =
       consentStatusData.join(smokerStatusData)
-        .where('consentPatientBarcode === 'smokerPatientBarcode).where("startedSmoking != '[Not Available]' && stoppedSmoking != '[Not Available]'")
-        .select('consentPatientBarcode, 'patientConsentStatus, 'patientSmokerStatus, 'stoppedSmoking - 'startedSmoking) // TODO: how to cast stoppedSmoking and startedSmoking from String to Int?!
+        .where('consentPatientBarcode === 'smokerPatientBarcode)
+        .where("startedSmoking != '[Not Available]' && stoppedSmoking != '[Not Available]'")
+        .select('consentPatientBarcode, 'patientConsentStatus, 'stoppedSmoking, 'startedSmoking) // TODO: how to cast stoppedSmoking and startedSmoking from String to Int?! -> write out as String and read in once again as Int...
         //{ (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, yearsSmoked) => (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, stoppedSmoking - startedSmoking) }
-    */
 
+
+    /* smokerStatusData based on numberPacksSmoked
     val smokerStatusData =
       readSmokerStatusData(env, smokerStatusFile, Array(1, 45))
         .as('smokerPatientBarcode, 'numberPacksSmoked)
@@ -71,7 +73,7 @@ object BcrSmokerPrediction {
         .where('consentPatientBarcode === 'smokerPatientBarcode)//.where("startedSmoking != '[Not Available]' && stoppedSmoking != '[Not Available]'")
         .select('consentPatientBarcode, 'patientConsentStatus, 'numberPacksSmoked)
     //{ (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, yearsSmoked) => (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, stoppedSmoking - startedSmoking) }
-
+    */
 
     // Zarin
     //result.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/somkeOutput", "\n", "\t").setParallelism(1)
@@ -85,7 +87,7 @@ object BcrSmokerPrediction {
 
 
   private def readConsentStatusData(env: ExecutionEnvironment, path: String, includedCols: Array[Int]): DataSet[ConsentStatus] = {
-    env.readCsvFile[ConsentStatus](path, fieldDelimiter = ",", includedFields = includedCols)
+    env.readCsvFile[ConsentStatus](path, fieldDelimiter = "\t", includedFields = includedCols)
   }
 
   private def readSmokerStatusData(env: ExecutionEnvironment, path: String, includedCols: Array[Int]): DataSet[SmokerStatus] = {
