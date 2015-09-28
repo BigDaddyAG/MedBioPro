@@ -20,7 +20,7 @@ package de.BigDaddyAG
 import org.apache.flink.api.scala._
 import org.apache.flink.api.scala.table._
 import org.apache.flink.core.fs.FileSystem.WriteMode
-
+import org.apache.flink.ml.regression.MultipleLinearRegression
 
 
 case class JoinedDataClass(consentPatientBarcode: String, patientConsentStatus: String, startedSmoking: Int, stoppedSmoking: Int)
@@ -54,6 +54,32 @@ object BcrSmokerPredictionResult {
     //result.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/somkeOutput", "\n", "\t").setParallelism(1)
     // Stefan
     joinedDataResult.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/joinedSomkeOutput.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
+
+
+
+    /*
+     * Flink MLR
+     * test code from: https://ci.apache.org/projects/flink/flink-docs-master/libs/ml/multiple_linear_regression.html
+     */
+
+    // Create multiple linear regression learner
+    val mlr = MultipleLinearRegression()
+      .setIterations(10)
+      .setStepsize(0.5)
+      .setConvergenceThreshold(0.001)
+
+    // Obtain training and testing data set
+    //val trainingDS: DataSet[LabeledVector] = ...
+    //val testingDS: DataSet[Vector] = ...
+
+    // Fit the linear model to the provided data
+    mlr.fit(joinedDataResult)
+
+    // Calculate the predictions for the test data
+    val predictions = mlr.predict(joinedDataResult)
+
+    predictions.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/predictions.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
+
 
 
     env.execute("Make it run!!1!")
