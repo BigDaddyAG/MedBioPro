@@ -20,15 +20,17 @@ package de.BigDaddyAG
 import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.api.scala._
 import org.apache.flink.api.scala.table._
+import org.apache.flink.runtime.util.MathUtils
 
 
 case class ConsentStatus(consentPatientBarcode: String, patientConsentStatus: String)
-case class SmokerStatus(smokerPatientBarcode: String, patientSmokerStatus: String, startedSmoking: String, stoppedSmoking: String)
+//case class SmokerStatus(smokerPatientBarcode: String, patientSmokerStatus: String, startedSmoking: String, stoppedSmoking: String)
+case class SmokerStatus(smokerPatientBarcode: String, numberPacksSmoked: String)
 
 
 object BcrSmokerPrediction {
 
-  
+
   def main(args: Array[String]) {
 
     // Zarin
@@ -47,6 +49,7 @@ object BcrSmokerPrediction {
       readConsentStatusData(env, consentStatusFile, Array(1, 3))
         .as('consentPatientBarcode, 'patientConsentStatus)
 
+    /* old version where we weren't able to cast to Int
     val smokerStatusData =
       readSmokerStatusData(env, smokerStatusFile, Array(1, 43, 44, 45))
         .as('smokerPatientBarcode, 'startedSmoking, 'stoppedSmoking, 'patientSmokerStatus)
@@ -54,8 +57,20 @@ object BcrSmokerPrediction {
     val result =
       consentStatusData.join(smokerStatusData)
         .where('consentPatientBarcode === 'smokerPatientBarcode).where("startedSmoking != '[Not Available]' && stoppedSmoking != '[Not Available]'")
-        .select('consentPatientBarcode, 'patientConsentStatus, 'patientSmokerStatus, 'stoppedSmoking.cast("INT") - 'startedSmoking.cast("INT"))
+        .select('consentPatientBarcode, 'patientConsentStatus, 'patientSmokerStatus, 'stoppedSmoking - 'startedSmoking) // TODO: how to cast stoppedSmoking and startedSmoking from String to Int?!
         //{ (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, yearsSmoked) => (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, stoppedSmoking - startedSmoking) }
+    */
+
+    val smokerStatusData =
+      readSmokerStatusData(env, smokerStatusFile, Array(1, 45))
+        .as('smokerPatientBarcode, 'numberPacksSmoked)
+
+
+    val result =
+      consentStatusData.join(smokerStatusData)
+        .where('consentPatientBarcode === 'smokerPatientBarcode)//.where("startedSmoking != '[Not Available]' && stoppedSmoking != '[Not Available]'")
+        .select('consentPatientBarcode, 'patientConsentStatus, 'numberPacksSmoked)
+    //{ (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, yearsSmoked) => (consentPatientBarcode, patientConsentStatus, patientSmokerStatus, stoppedSmoking - startedSmoking) }
 
 
     // Zarin
