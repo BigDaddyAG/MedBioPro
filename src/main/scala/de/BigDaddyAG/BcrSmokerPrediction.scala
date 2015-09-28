@@ -29,8 +29,9 @@ case class SmokerStatus(smokerPatientBarcode: String, startedSmoking: String, st
 
 object BcrSmokerPrediction {
 
-
   def main(args: Array[String]) {
+
+    val env = ExecutionEnvironment.getExecutionEnvironment
 
     // Zarin
     //val smokerStatusFile = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_clinical_patient_luad.txt"
@@ -39,10 +40,6 @@ object BcrSmokerPrediction {
     val consentStatusFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_biospecimen_cqcf_luad.txt"
     val smokerStatusFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_clinical_patient_luad.txt"
     //val joinedDataFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/somkeOutput.csv"
-
-
-    val env = ExecutionEnvironment.getExecutionEnvironment
-
 
     val consentStatusData =
       readConsentStatusData(env, consentStatusFile, Array(1, 3))

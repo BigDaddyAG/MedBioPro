@@ -28,18 +28,15 @@ case class JoinedDataClass(consentPatientBarcode: String, patientConsentStatus: 
 
 object BcrSmokerPredictionResult {
 
-
   def main(args: Array[String]) {
+
+    val env = ExecutionEnvironment.getExecutionEnvironment
 
     // Zarin
     //val smokerStatusFile = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_clinical_patient_luad.txt"
     //val consentStatusFile = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_biospecimen_cqcf_luad.txt"
     // Stefan
     val joinedDataFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/somkeOutput.csv"
-
-
-    val env = ExecutionEnvironment.getExecutionEnvironment
-
 
 
     val joinedData =
@@ -49,16 +46,15 @@ object BcrSmokerPredictionResult {
     val joinedDataResult =
       joinedData
         //.select('id, 'status, 'stoppedSmoking, 'startedSmoking)
-      //{ ('id, 'status, 'yearsSmoked) => ('id, 'status, 'stoppedSmoking - 'startedSmoking) }
-       .select('id, 'status, 'stoppedSmoking - 'startedSmoking)
+        //{ ('id, 'status, 'yearsSmoked) => ('id, 'status, 'stoppedSmoking - 'startedSmoking) }
+        .select('id, 'status, 'stoppedSmoking - 'startedSmoking)
 
 
     // Zarin
     //result.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/somkeOutput", "\n", "\t").setParallelism(1)
-
     // Stefan
-    //result.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/somkeOutput.csv", "\n", ",").setParallelism(1)
     joinedDataResult.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/joinedSomkeOutput.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
+
 
     env.execute("Make it run!!1!")
 
