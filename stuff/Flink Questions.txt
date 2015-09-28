@@ -1,0 +1,8 @@
+Flink Meetup Questions
+
+
+- TableAPI: how can we read in 17,000 columns and do math on it (standard deviation)
+- TableAPI: how to specify header/labels when reading in CSV?
+- TableAPI: how to cast 'variable from String to Int?
+- TableAPI: explain Scala example code for Join (https://ci.apache.org/projects/flink/flink-docs-master/apis/dataset_transformations.html#join)
+
