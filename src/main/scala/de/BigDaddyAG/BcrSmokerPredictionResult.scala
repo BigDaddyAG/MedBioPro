@@ -40,6 +40,7 @@ object BcrSmokerPredictionResult {
     //Zarin
     val joinedDataFile = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/output/somkeOutput.csv"
 
+
     val joinedData =
       readJoinedData(env, joinedDataFile, Array(0,1,2,3))
         .as('id, 'status, 'stoppedSmoking, 'startedSmoking)
