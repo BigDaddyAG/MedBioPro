@@ -62,6 +62,7 @@ object BcrSmokerPredictionResult {
      * test code from: https://ci.apache.org/projects/flink/flink-docs-master/libs/ml/multiple_linear_regression.html
      */
 
+    /*
     // Create multiple linear regression learner
     val mlr = MultipleLinearRegression()
       .setIterations(10)
@@ -79,7 +80,7 @@ object BcrSmokerPredictionResult {
     val predictions = mlr.predict(joinedDataResult)
 
     predictions.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/predictions.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
-
+    */
 
 
     env.execute("Make it run!!1!")
