@@ -36,8 +36,9 @@ object BcrSmokerPredictionResult {
     //val smokerStatusFile = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_clinical_patient_luad.txt"
     //val consentStatusFile = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/BCR/Clinical/Biotab/nationwidechildrens.org_biospecimen_cqcf_luad.txt"
     // Stefan
-    val joinedDataFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/somkeOutput.csv"
-
+   // val joinedDataFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/somkeOutput.csv"
+    //Zarin
+    val joinedDataFile = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/output/somkeOutput.csv"
 
     val joinedData =
       readJoinedData(env, joinedDataFile, Array(0,1,2,3))
@@ -53,7 +54,9 @@ object BcrSmokerPredictionResult {
     // Zarin
     //result.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/somkeOutput", "\n", "\t").setParallelism(1)
     // Stefan
-    joinedDataResult.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/joinedSomkeOutput.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
+    //joinedDataResult.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/joinedSomkeOutput.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
+    //Zarin
+    joinedDataResult.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/output/joinedSomkeOutput.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
 
 
 
@@ -78,7 +81,9 @@ object BcrSmokerPredictionResult {
     // Calculate the predictions for the test data
     val predictions = mlr.predict(joinedDataResult)
 
-    predictions.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/predictions.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
+   // predictions.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/predictions.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
+   //Zarin
+    predictions.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/output/predictions.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
 
 
 
