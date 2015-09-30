@@ -43,7 +43,7 @@ object BcrSmokerPredictionResult {
     // Stefan
    // val joinedDataFile = "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/somkeOutput.csv"
     //Zarin
-    val joinedDataFile = "/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/output/somkeOutput.csv"
+    val joinedDataFile = "/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/output/somkeOutput.csv"
 
 
     val joinedData =
@@ -62,7 +62,7 @@ object BcrSmokerPredictionResult {
     // Stefan
     //joinedDataResult.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/joinedSomkeOutput.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
     //Zarin
-    joinedDataResult.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddyAG/MedBioPro/data/output/joinedSomkeOutput.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
+    joinedDataResult.writeAsCsv("/Users/Zarin/Documents/Uni/BigDaddy/MedBioPro/data/output/joinedSomkeOutput.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
 
 
 

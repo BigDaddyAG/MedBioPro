@@ -5,4 +5,8 @@ Flink Meetup Questions
 - TableAPI: how to specify header/labels when reading in CSV?
 - TableAPI: how to cast 'variable from String to Int?
 - TableAPI: explain Scala example code for Join (https://ci.apache.org/projects/flink/flink-docs-master/apis/dataset_transformations.html#join)
+- TableAPI: how to read in and preprocess the data without changing the order?
 
+- TableAPI: Is it  possible to define columns of a data set as a variable :
+      case class MyLineitem(col1: Int, col2: Int, col3: String) like col”i”? 
+- Machine Learning: 
