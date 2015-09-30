@@ -21,6 +21,11 @@ import org.apache.flink.api.scala._
 import org.apache.flink.api.scala.table._
 import org.apache.flink.core.fs.FileSystem.WriteMode
 import org.apache.flink.ml.regression.MultipleLinearRegression
+import org.apache.flink.api.scala.DataSet
+import org.apache.flink.ml.common._
+import org.apache.flink.ml.MLUtils._
+
+
 
 
 case class JoinedDataClass(consentPatientBarcode: String, patientConsentStatus: String, startedSmoking: Int, stoppedSmoking: Int)
@@ -60,9 +65,22 @@ object BcrSmokerPredictionResult {
     /*
      * Flink MLR
      * test code from: https://ci.apache.org/projects/flink/flink-docs-master/libs/ml/multiple_linear_regression.html
+     *
+     * information about libSVM format:
+     * In order to train SVMs, the machine learning library should be able to read standard SVM input file formats. A widespread format is used by libSVM and SMVLight which has the following format:
+     *  <line> .=. <target> <feature>:<value> <feature>:<value> ... <feature>:<value> # <info>
+     *  <target> .=. +1 | -1 | 0 | <float>
+     *  <feature> .=. <integer> | "qid"
+     *  <value> .=. <float>
+     *  <info> .=. <string>
+     *
+     * More information:
+     *  http://svmlight.joachims.org/
+     *  http://www.csie.ntu.edu.tw/~cjlin/libsvm/faq.html#/Q03:_Data_preparation
+     *  https://stackoverflow.com/questions/31368511/flink-hbase-input-for-machine-learning-algorithms
      */
 
-    /*
+
     // Create multiple linear regression learner
     val mlr = MultipleLinearRegression()
       .setIterations(10)
@@ -73,6 +91,9 @@ object BcrSmokerPredictionResult {
     //val trainingDS: DataSet[LabeledVector] = ...
     //val testingDS: DataSet[Vector] = ...
 
+    val trainingData: DataSet[LabeledVector] = readLibSVM(env, "/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/joinedSomkeOutput.csv")
+    //val testingData: DataSet[Vector] = readVectorFile(testingDataPath)
+
     // Fit the linear model to the provided data
     mlr.fit(joinedDataResult)
 
@@ -80,7 +101,6 @@ object BcrSmokerPredictionResult {
     val predictions = mlr.predict(joinedDataResult)
 
     predictions.writeAsCsv("/Users/stefan/Documents/Uni/SoSe 2015/Medical Bioinformatics/assignment11/BigDaddyAG/MedBioPro/data/output/predictions.csv", "\n", ",", WriteMode.OVERWRITE).setParallelism(1)
-    */
 
 
     env.execute("Make it run!!1!")
@@ -92,5 +112,9 @@ object BcrSmokerPredictionResult {
     env.readCsvFile[JoinedDataClass](path, fieldDelimiter = ",", includedFields = includedCols)
   }
 
+  private def readVectorFile = (line: String) => {
+    val Seq(id, vector @ _*) = line.split(',').toSeq
+    id.toInt -> (vector map { _.toDouble } toArray)
+  }
 
 }
