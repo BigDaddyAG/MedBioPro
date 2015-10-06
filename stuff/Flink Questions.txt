@@ -10,3 +10,10 @@ Flink Meetup Questions
 - TableAPI: Is it  possible to define columns of a data set as a variable :
       case class MyLineitem(col1: Int, col2: Int, col3: String) like col”i”? 
 - Machine Learning: 
+
+
+-> approaches
+- define own input format (text, file input format)
+- createInputSplits-method: every file is an input split, one record per gene symbol
+https://ci.apache.org/projects/flink/flink-docs-master/apis/dataset_transformations.html#groupreduce-on-grouped-dataset
+
