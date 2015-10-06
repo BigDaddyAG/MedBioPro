@@ -20,3 +20,6 @@
 * after indexing you should be able to see (and compile) the files located at `src/main/scala/de.BigDaddyAG`
 * have fun!
 
+
+##### TODO
+* describe repository structure in README.md
