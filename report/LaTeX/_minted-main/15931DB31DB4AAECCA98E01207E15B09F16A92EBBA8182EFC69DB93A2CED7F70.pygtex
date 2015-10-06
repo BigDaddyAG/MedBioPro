@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{val} \PYG{n}{firstFile} \PYG{k}{=} \PYG{n}{getDataSetFile}\PYG{o}{(}\PYG{n}{env}\PYG{o}{,}
+	\PYG{n}{filenameArray}\PYG{o}{(}\PYG{l+m+mi}{1}\PYG{o}{)).}\PYG{n}{as}\PYG{o}{(}\PYG{+Symbol}{\PYGZsq{}firstFileCol1}\PYG{o}{,}
+	\PYG{+Symbol}{\PYGZsq{}firstFileCol2}\PYG{o}{)}
+\PYG{k}{for} \PYG{o}{(}\PYG{n}{i} \PYG{k}{\PYGZlt{}\PYGZhy{}} \PYG{l+m+mi}{2} \PYG{n}{to} \PYG{n}{filenameArray}\PYG{o}{.}\PYG{n}{size}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+
+\PYG{c+c1}{// Read a file but only includes the 1st,}
+\PYG{c+c1}{// 2nd column \PYGZhy{} returns DataSet[MyLineitem]}
+\PYG{k}{val} \PYG{n+nc}{CurrentFile} \PYG{k}{=} \PYG{n}{getDataSetFile}\PYG{o}{(}\PYG{n}{env}\PYG{o}{,}
+	\PYG{n}{filenameArray}\PYG{o}{(}\PYG{n}{i}\PYG{o}{)).}\PYG{n}{as}\PYG{o}{(}\PYG{+Symbol}{\PYGZsq{}col1}\PYG{o}{,} \PYG{+Symbol}{\PYGZsq{}col2}\PYG{o}{)}
+
+\PYG{k}{val} \PYG{n}{items} \PYG{k}{=}
+	\PYG{n}{firstFile}\PYG{o}{.}\PYG{n}{join}\PYG{o}{(}\PYG{n+nc}{CurrentFile}\PYG{o}{)}
+		\PYG{o}{.}\PYG{n}{where}\PYG{o}{(}\PYG{+Symbol}{\PYGZsq{}firstFileCol1} \PYG{o}{===} \PYG{+Symbol}{\PYGZsq{}col1}\PYG{o}{)}
+		\PYG{o}{.}\PYG{n}{select}\PYG{o}{()}
+\PYG{o}{\PYGZcb{}}
+\PYG{n}{items}\PYG{o}{.}\PYG{n}{writeAsCsv}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}file://path\PYGZdq{}}\PYG{o}{,} \PYG{l+s}{\PYGZdq{}\PYGZbs{}n\PYGZdq{}}\PYG{o}{,} \PYG{l+s}{\PYGZdq{}\PYGZbs{}t\PYGZdq{}}\PYG{o}{)}
+\end{Verbatim}

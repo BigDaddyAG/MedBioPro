@@ -3,13 +3,13 @@
 
 \access{Advance Access Publication Date: 30 September 2015}
 \appnotes{Manuscript Category}
-
+\usepackage{minted}
 \begin{document}
 \firstpage{1}
 
 \subtitle{Medical Bioinformatics course at Freie Universit\"at Berlin}
 
-\title[MedBioProject]{Report for the Medical Bioinformatics Project}
+\title[MedBioProject]{Report for the Project in Medical Bioinformatics}
 \author[Sample \textit{et~al}.]{Stefan Jacob\,$^{\text{\sfb 1,}*}$, Zarin Shakibaei\,$^{\text{\sfb 1,}*}$}
 \address{$^{\text{\sf 1}}$BigDaddyAG, Fachbereich Mathematik und Informatik, Freie Universit\"at Berlin, Takustra\ss{}e 9, 14195 Berlin, Germany}
 
@@ -17,14 +17,12 @@
 
 \history{Received on XXXXX; revised on XXXXX; accepted on XXXXX}
 
-\editor{Associate Editor: XXXXXXX}
+\editor{Associate Editor: Tim Conrad}
 
 \abstract{\textbf{Motivation:} As the amount of biological data has recently increased due to new and enhanced techniques like next-generation sequencing, the analysis of this data also needs to improve and especially speed up. As a result, new frameworks and platforms for distributed stream and batch data processing are evolving. In a university project, we developed a pipeline for the analysis of biological data from \emph{The Cancer Genome Atlas (TCGA)} data portal, which provides - among others - the access to data from high level sequence analysis of tumor genomes. In this report we present the used methods and discuss their results.\\
-\textbf{Results:} Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text
-Text Text Text Text Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text\\
-\textbf{Availability:} Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text
-Text Text Text Text Text Text Text Text Text Text Text Text Text Text  Text\\
-\textbf{Contact:} \href{name@bio.com}{name@bio.com}\\
+\textbf{Results:} No results have been achieved yet.\\
+\textbf{Availability:} All data we used is available in our GitHub repository under: \href{https://github.com/BigDaddyAG/MedBioProject}{https://github.com/BigDaddyAG/MedBioProject}\\
+\textbf{Contact:} \href{stefan.jacob@fu-berlin.de}{stefan.jacob@fu-berlin.de} and \href{zarin.shakibaei@fu-berlin.de}{zarin.shakibaei@fu-berlin.de}\\
 \textbf{Supplementary information:} Supplementary data are available at \textit{Bioinformatics}
 online.}
 
@@ -32,351 +30,141 @@ online.}
 
 \section{Introduction}
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text. Figure~\ref{fig:01}
-shows that the above method  Text Text Text Text  Text Text Text
-Text Text Text  Text Text.  \citep{Bag01} wants to know about
-{\ldots}{\ldots} text follows.
-\begin{equation}
-\sum \text{\it x}+ \text{\it y} =\text{\it Z}\label{eq:01}\vspace*{-10pt}
-\end{equation}
+As a summarizing project of our course "Big Data in Life Sciences" we were asked to develop a pipeline that can analyze data from the \emph{The Cancer Genome Atlas (TCGA)} (with a focus on lung adenocarcinoma) and classify as a result between to different subgroups of cancer or between an ill and healthy patient.
+
+This is our story of the failures, frustrations and all issues we faced... 
 
 %\enlargethispage{12pt}
 
 \section{Approach}
 
-Equation~(\ref{eq:01}) Text Text Text Text Text Text  Text Text
-Text Text Text Text Text Text Text Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about text text text text
-.....
+Following an overview of how we thought the pipeline could look like:
+\begin{itemize}
+\item get appropriate data from TCGA (either one or both)
+\begin{itemize}
+\item[--] transcriptomic data (from GCC\footnote{Genome Characterization Center})
+\item[--] tissue/patient specific information (from BCR\footnote{Biospecimen Core Resource})
+\end{itemize}
+\item preprocess the data (filter out unnecessary information and join all patients into one single data table)
+\item train flink machine learning API using above created data
+\item take new data and classify it based on rendered model
+\end{itemize}
+The generated pipeline should be based on \emph{Apache Flink}, an open source platform for distributed stream and batch data processing that is in an early development state (beta status).
+
+The final version of the pipeline should also be able to run on a computer cluster in order to speed up calculation.
+
+To achieve all this and simplify collaboration (and also because we were "forced" to do it) we set up a GitHub repository that contains all used data and the code written so far.
+
+
+\section{Data}
+
+Two different data archives have been downloaded from \emph{The Cancer Genome Atlas}.
+
+The first archive comes from the \emph{Genome Characterization Center (GCC)} and contains text files with gene samples and their corresponding expression level (log2 lowess normalized).
+
+The second archive which is provided by the \emph{Biospecimen Core Resource (BCR)} contains carefully cataloged tissue and sample information with important medical information about the patient. Each text file from the BCR contains other information e.g. the gender of the patient or the treatment, used drugs and some information about the tumor (size, site, location, etc.)
+
+As mentioned previously, the downloaded GCC-Data folder contains 35 text files, each referring to one patient. The first column contains all Genes from a microarry chip, the second column describes expression levels corresponding to each gene.
 
 
 \begin{methods}
 \section{Methods}
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about text text text
-text\vspace*{1pt}
+\subsection{Various approaches for data preparation}
 
-\begin{itemize}
-\item for bulleted list, use itemize
-\item for bulleted list, use itemize
-\item for bulleted list, use itemize\vspace*{1pt}
-\end{itemize}
+\subsubsection{Transcriptomic data}
+After mature consideration, we decided to take the above-mentioned transcriptomic data from TCGA's Genome Characterization Center (GCC) and join it in a big table with Flinks TableAPI (see below for the code).
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method Text
-Text Text Text Text Text Text Text Text Text Text Text.
-\citealp{Boffelli03} might want to know about text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text Text Text Text Text Text Text.
+The goal here was to read all text files in the GCC folder that contain about 17,000 lines with two columns (one for the gene symbol and one for the logarithmized expression level for each patient) and join them so that in the end, we get one single file, which contains one gene column and 35 gene expression level columns of all 35 patients.
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text\vadjust{\newpage}.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method Text
-Text Text Text Text Text Text Text Text Text Text Text.
-\citealp{Boffelli03} might want to know about text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text Text Text Text Text Text Text.
+Here is the used scala code to read in all text files iteratively:
+
+\begin{minted}[linenos]{scala}
+// function to list all files in a directory
+def getListOfFiles(dir: String): List[File] = {
+  val d = new File(dir)
+  if (d.exists && d.isDirectory) {
+    d.listFiles.filter(_.isFile).toList
+  } else {
+    List[File]()
+  }
+}
+\end{minted}
+
+We generated a list of strings that each contains the path to a single (text) file.
+Next, we split up the list at each unique path and iterated over them.
+
+\begin{minted}[linenos]{scala}
+// extract the filename of absolute path to file 
+val files = getListOfFiles(dataGCCFilePath)
+val filenameArray = files.toString.split(",")
+val sizeOfFilenameArray = filenameArray.size
+\end{minted}
+
+Then, we tried to iterate over our newly created array of file paths and join them into a table.
+
+\begin{minted}[linenos]{scala}
+val firstFile = getDataSetFile(env,
+	filenameArray(1)).as('firstFileCol1,
+	'firstFileCol2)
+for (i <- 2 to filenameArray.size-2) {
+
+// Read a file but only includes the 1st,
+// 2nd column - returns DataSet[MyLineitem]
+val CurrentFile = getDataSetFile(env,
+	filenameArray(i)).as('col1, 'col2)
+
+val items =
+	firstFile.join(CurrentFile)
+		.where('firstFileCol1 === 'col1)
+		.select()
+}
+items.writeAsCsv("file://path", "\n", "\t")
+\end{minted}
+
+This method has been failed due to a \mintinline{scala}|writeAsCsv()| method problem. Somehow this method didn't recognize the \mintinline{scala}|items| variable out of the for-loop. In addition how joining in Flink works would never let us to join tables in this way. Refering to the documentation, Flink can always join two tables with fixed column sizes but as one of our tables was growing over the time, Flink wasn't able to handle that.
+
+As the iteration turned out not to work properly, we ended up in joining every two tables manually until all 35 patients were in one big table\footnote{That was also the proposed method by the Flink developers!}.
+
+%Then, while trying to transpose the data (for regression and standard deviation approaches), we discovered that flink was unable to handle 17,000 columns.
+
+The problem now was that we had a table with 17,816 lines - one for each gene and its expression level. We came up with the idea to preprocess the data in that way, that we only wanted to keep genes that showed a significant change in their expression value over the different patients. Therefore, we tried to use the standard deviation for each line of the table and only take lines into account, that had a SD bigger than for example 3. The occurring problem was that Flinks TableAPI was only capable of taking the SD of columns into account, but not the one of lines. That’s why we transposed the dataset with the expression levels resulting in a set that had 17,816 columns. Now the problem was that we had to enumerate these 17,816 columns in order to be able to read in the dataset with Flinks TableAPI as each unique column had to the mentioned (we found no way to simply read in all columns without telling Flink how many columns there exists). So that's where we got stuck in the end.
 
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
+\subsubsection{Tissue/patient specific information data a.k.a. the only Flink alternative approach}
+
+To continue the project, we needed a smaller input data (with less columns). So looking into the BCR data inspired us to preprocess these files and prepare an input file for Flink-ML (machine learning). The file mentioned below contained interesting information, which could be used to classify patients into two groups regarding their smoking behavior:
+\begin{verbatim}
+nationwidechildrens.org_clinical_patient_luad.txt
+\end{verbatim}
+
+After reconsidering all available approaches, it remained only one way to handle our input data, using
+\begin{minted}{scala}
+Interface InputFormat<OT,T extends InputSplit>
+	(text, file InputFormat)
+\end{minted}
+and then overwrite the default 
+\mintinline{scala}|createInputSplits|
+function with an own one that reads in every file as an input split record and then saves it in an own specific file format of 2-tuples containing the gene symbols (1st tuple) and all the expression values (2nd tuple) as \mintinline{scala}|<String><<double, double, doule, ...>>| 
+
+Due to lack of time (and because we met the Flink developers one day before the project's deadline) we weren't able to finish this approach.
 
 
+\subsection{Machine Learning Methods}
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
+Referring the definition of SVM:
 
-\subsection{This is subheading}
+\begin{quotation}
+In machine learning, support vector machines (SVMs, also support vector networks) are supervised learning models with associated learning algorithms that analyze data and recognize patterns, used for classification and regression analysis. Given a set of training examples, each marked for belonging to one of two categories, an SVM training algorithm builds a model that assigns new examples into one category or the other, making it a non-probabilistic binary linear classifier. \textit{(citated from Wikipedia)}
+\end{quotation}
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text
-text. Text Text Text Text Text Text  Text Text Text Text Text Text
-Text Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
+The goal here was to use an appropriate input data and train Flink ML (SVM) and to render a model which could classify any given data (test data).
+
+We could present the ML-API with example inputs of patients who smoked longer than 30 years and died of lung cancer (death as a desired output) and the ML could learn a general rule that maps patients to appropriate consent status.
+
+TODO: insert code and screenshots here.
 
 
-\subsubsection{This is subsubheading}
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-
-
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text\break
-text text
-
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text
-textText Text Text Text Text Text  Text Text Text Text Text Text
-Text Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-
-\enlargethispage{6pt}
-
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-
-
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-
-\begin{table}[!t]
-\processtable{This is table caption\label{Tab:01}} {\begin{tabular}{@{}llll@{}}\toprule head1 &
-head2 & head3 & head4\\\midrule
-row1 & row1 & row1 & row1\\
-row2 & row2 & row2 & row2\\
-row3 & row3 & row3 & row3\\
-row4 & row4 & row4 & row4\\\botrule
-\end{tabular}}{This is a footnote}
-\end{table}
 
 \end{methods}
 
@@ -477,53 +265,18 @@ Text.
 
 \section{Conclusion}
 
-(Table~\ref{Tab:01}) Text Text Text Text Text Text  Text Text Text
-Text Text Text Text Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
+This project was harsh!
 
+Not knowing exactly which data to take, going through unreadable and not well curated Flink documentation and struggling with unresolvable error warnings and crude design concepts of Flink, we had a really frustrating time of one month.
+If showing us how undelightful "Big Data" could be was one of the aims of the project, then it definitively predominated!
 
+Having spent countless hours without any significant progress was even more frustrating as our instructor told us that he managed to bring up a pipeline in half a day.
 
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text  Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about  text text text text
+But we couldn't count on his consultation as he was completely unreachable during the whole time of the project. That's why we used the opportunity to talk to the Flink developers directly, which - in the end - didn't solve any of our problems but showed us that they also had no real clue how to realize this project with Flink.
 
-\begin{enumerate}
-\item this is item, use enumerate
-\item this is item, use enumerate
-\item this is item, use enumerate
-\end{enumerate}
+Furthermore, while talking to the Flink developers, we got to know that their changed their focus more on stream data processing and not on machine learning algorithms, which will stay in a beta status.
 
-Text Text Text Text Text Text Text Text Text Text Text Text Text
-Text Text Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows\vadjust{\pagebreak} that the
-above method  Text Text Text Text Text Text Text Text Text Text
-Text Text.  \citealp{Boffelli03} might want to know about text
-text text text Text Text Text Text Text Text  Text Text Text Text
-Text Text Text Text Text Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text Text Text Text Text Text Text  Text Text.
-\citealp{Boffelli03} might want to know about text text text text
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text Text Text Text Text Text\break Text.
-
-
-Text Text Text Text Text Text  Text Text Text Text Text Text Text
-Text Text  Text Text Text Text Text Text.
-Figure~2\vphantom{\ref{fig:02}} shows that the above method  Text
-Text Text Text\vspace*{-10pt}
+This all sums up in the conclusion that we wouldn't recommend Flink for the creation of a pipeline for analyzing genomic or medical data (quod erat demonstrandum?). The Flink developers even encouraged us to do the pipeline completely without Flink and only in Scala.
 
 
 \section*{Acknowledgements}

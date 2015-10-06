@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// extract the filename of absolute path to file}
+\PYG{k}{val} \PYG{n}{files} \PYG{k}{=} \PYG{n}{getListOfFiles}\PYG{o}{(}\PYG{n}{dataGCCFilePath}\PYG{o}{)}
+\PYG{k}{val} \PYG{n}{filenameArray} \PYG{k}{=} \PYG{n}{files}\PYG{o}{.}\PYG{n}{toString}\PYG{o}{.}\PYG{n}{split}\PYG{o}{(}\PYG{l+s}{\PYGZdq{},\PYGZdq{}}\PYG{o}{)}
+\PYG{k}{val} \PYG{n}{sizeOfFilenameArray} \PYG{k}{=} \PYG{n}{filenameArray}\PYG{o}{.}\PYG{n}{size}
+\end{Verbatim}

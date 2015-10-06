@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nc}{Interface} \PYG{n+nc}{InputFormat}\PYG{o}{\PYGZlt{}}\PYG{n+nc}{OT}\PYG{o}{,}\PYG{n}{T} \PYG{k}{extends} \PYG{n+nc}{InputSplit}\PYG{o}{\PYGZgt{}}
+	\PYG{o}{(}\PYG{n}{text}\PYG{o}{,} \PYG{n}{file} \PYG{n+nc}{InputFormat}\PYG{o}{)}
+\end{Verbatim}

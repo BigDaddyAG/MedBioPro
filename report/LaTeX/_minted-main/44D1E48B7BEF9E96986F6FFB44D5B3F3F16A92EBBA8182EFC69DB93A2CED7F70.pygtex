@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// function to list all files in a directory}
+\PYG{k}{def} \PYG{n}{getListOfFiles}\PYG{o}{(}\PYG{n}{dir}\PYG{k}{:} \PYG{k+kt}{String}\PYG{o}{)}\PYG{k}{:} \PYG{k+kt}{List}\PYG{o}{[}\PYG{k+kt}{File}\PYG{o}{]} \PYG{k}{=} \PYG{o}{\PYGZob{}}
+  \PYG{k}{val} \PYG{n}{d} \PYG{k}{=} \PYG{k}{new} \PYG{n+nc}{File}\PYG{o}{(}\PYG{n}{dir}\PYG{o}{)}
+  \PYG{k}{if} \PYG{o}{(}\PYG{n}{d}\PYG{o}{.}\PYG{n}{exists} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{d}\PYG{o}{.}\PYG{n}{isDirectory}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+    \PYG{n}{d}\PYG{o}{.}\PYG{n}{listFiles}\PYG{o}{.}\PYG{n}{filter}\PYG{o}{(}\PYG{k}{\PYGZus{}}\PYG{o}{.}\PYG{n}{isFile}\PYG{o}{).}\PYG{n}{toList}
+  \PYG{o}{\PYGZcb{}} \PYG{k}{else} \PYG{o}{\PYGZob{}}
+    \PYG{n+nc}{List}\PYG{o}{[}\PYG{k+kt}{File}\PYG{o}{]()}
+  \PYG{o}{\PYGZcb{}}
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}
