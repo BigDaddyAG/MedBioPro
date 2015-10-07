@@ -23,11 +23,10 @@
 
 ##### Git Repository Structure
 This git repository contains following files/folders
-
-	* implemented Scala codes could be found here `src/main/scala/de/BigDaddyAG`
-	* `Data` contains subfolders:
+	* `src/main/scala/de/BigDaddyAG` implemented Scala codes could be found here 
+	* `Data`:
 		* downloaded Clinical Biotab data`BCR`  
 		* TCGA data from 35 patients `GCC`:  
 			* `All`: the final TCGA table of 16 patinets, which are manuelly joined: `allGccDataClean.csv`  
-		* `output` `somkeOutput.csv` is a table of four columns: patinentID, Consent Status 
+		* `output`:`somkeOutput.csv` is a table of four columns: patinentID, Consent Status 
 		            and the last two columns refer to the start and end year of patinet's smoking behaviour. The previous table has been used to generate `joinedSomkeOutput.csv`. Here the third column shows how many years each patient smoked.   
