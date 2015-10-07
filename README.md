@@ -21,8 +21,9 @@
 * have fun!
 
 
-##### TODO
+##### Git Repository Structure
 This git repository contains following files/folders
+###
 	* `src/main/scala/de/BigDaddyAG`, implemented Scala codes could be found here
 	* `Data`
 		* `BCR`, downloaded Clinical Biotab data 
