@@ -1,6 +1,6 @@
 # MedBioPro aka Medical Bioinformatics Project
 
-#### This is the GitHub page for the project done during the Summer Term's course of Medical Bioinformatics at the Freie Universität Berlin.
+#### This is the GitHub page for the project done during the Summer Term 2015's course of Medical Bioinformatics at the Freie Universität Berlin.
 
 ---
 
