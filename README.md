@@ -34,5 +34,5 @@
     * `output`:contains following generated files: 
       * `somkeOutput.csv`: a table of four columns: patientID, Consent Status, end year and start year of smoking 
 	  * `joinedSomkeOutput.csv`: here the third column shows how many years each patient smoked
-  *  `Report`: the LateX and Word - report file 
+  *  `Report`: the LaTeX and Word - report file 
   *  `Stuff`: the Git preparation commands, related papers to this project and pictures 
