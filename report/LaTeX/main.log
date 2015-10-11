@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.9.22)  11 OCT 2015 16:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.9.22)  11 OCT 2015 16:33
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -327,9 +327,6 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 runsystem(mkdir -p "_minted-main")...executed.
 
-runsystem(pygmentize -S default -f latex -P commandprefix=PYGdefault > "_minted
--main/default.pygstyle")...executed.
-
 
 (./_minted-main/default.pygstyle)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/tools/verbatim.sty
@@ -393,10 +390,6 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-runsystem(pygmentize -S default -f latex -P commandprefix=PYG > "_minted-main/d
-efault-pyg-prefix.pygstyle")...executed.
-
-
 (./_minted-main/default-pyg-prefix.pygstyle)
 LaTeX Font Info:    Try loading font information for OT1+phv on input line 20.
 
@@ -505,10 +498,6 @@ terization
 
 \openout3 = `main.pyg'.
 
-runsystem(pygmentize -l scala -f latex -P commandprefix=PYG -F tokenmerge -o "_
-minted-main/44D1E48B7BEF9E96986F6FFB44D5B3F3F16A92EBBA8182EFC69DB93A2CED7F70.py
-gtex" "main.pyg" )...executed.
-
 
 (./_minted-main/44D1E48B7BEF9E96986F6FFB44D5B3F3F16A92EBBA8182EFC69DB93A2CED7F7
 0.pygtex
@@ -531,36 +520,20 @@ LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <7> not available
 ])
 \openout3 = `main.pyg'.
 
-runsystem(pygmentize -l scala -f latex -P commandprefix=PYG -F tokenmerge -o "_
-minted-main/1EF01E533863B6FC01486F258268F66FF16A92EBBA8182EFC69DB93A2CED7F70.py
-gtex" "main.pyg" )...executed.
-
 
 (./_minted-main/1EF01E533863B6FC01486F258268F66FF16A92EBBA8182EFC69DB93A2CED7F7
 0.pygtex)
 \openout3 = `main.pyg'.
-
-runsystem(pygmentize -l scala -f latex -P commandprefix=PYG -F tokenmerge -o "_
-minted-main/15931DB31DB4AAECCA98E01207E15B09F16A92EBBA8182EFC69DB93A2CED7F70.py
-gtex" "main.pyg" )...executed.
 
 
 (./_minted-main/15931DB31DB4AAECCA98E01207E15B09F16A92EBBA8182EFC69DB93A2CED7F7
 0.pygtex)
 \openout5 = `main.pyg'.
 
-runsystem(pygmentize -l scala -f latex -P commandprefix=PYG -F tokenmerge -o "_
-minted-main/57734B81D1FFF6578BAF9D14E53AE958F16A92EBBA8182EFC69DB93A2CED7F70.py
-gtex" "main.pyg" )...executed.
-
 
 (./_minted-main/57734B81D1FFF6578BAF9D14E53AE958F16A92EBBA8182EFC69DB93A2CED7F7
 0.pygtex)
 \openout5 = `main.pyg'.
-
-runsystem(pygmentize -l scala -f latex -P commandprefix=PYG -F tokenmerge -o "_
-minted-main/A65FF54B2A9E1198173495219C3B23EAF16A92EBBA8182EFC69DB93A2CED7F70.py
-gtex" "main.pyg" )...executed.
 
 
 (./_minted-main/A65FF54B2A9E1198173495219C3B23EAF16A92EBBA8182EFC69DB93A2CED7F7
@@ -570,27 +543,15 @@ Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
 \openout3 = `main.pyg'.
 
-runsystem(pygmentize -l scala -f latex -P commandprefix=PYG -F tokenmerge -o "_
-minted-main/B37429931576BA6F02EBA452F4E058D9F16A92EBBA8182EFC69DB93A2CED7F70.py
-gtex" "main.pyg" )...executed.
-
 
 (./_minted-main/B37429931576BA6F02EBA452F4E058D9F16A92EBBA8182EFC69DB93A2CED7F7
 0.pygtex)
 \openout5 = `main.pyg'.
 
-runsystem(pygmentize -l scala -f latex -P commandprefix=PYG -F tokenmerge -o "_
-minted-main/BD5D1281A2462C0648101711E2AFC529F16A92EBBA8182EFC69DB93A2CED7F70.py
-gtex" "main.pyg" )...executed.
-
 
 (./_minted-main/BD5D1281A2462C0648101711E2AFC529F16A92EBBA8182EFC69DB93A2CED7F7
 0.pygtex)
 \openout5 = `main.pyg'.
-
-runsystem(pygmentize -l scala -f latex -P commandprefix=PYG -F tokenmerge -o "_
-minted-main/68B8B58A9DB5EAE93044FE677BF2945FF16A92EBBA8182EFC69DB93A2CED7F70.py
-gtex" "main.pyg" )...executed.
 
 
 (./_minted-main/68B8B58A9DB5EAE93044FE677BF2945FF16A92EBBA8182EFC69DB93A2CED7F7
@@ -663,7 +624,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  5821 strings out of 493091
  91569 string characters out of 6134964
- 198772 words of memory out of 5000000
+ 197796 words of memory out of 5000000
  9118 multiletter control sequences out of 15000+600000
  53897 words of font info for 109 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
@@ -683,7 +644,7 @@ lvetic/uhvbo8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/helvetic
 a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></us
 r/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/te
 xlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (3 pages, 157329 bytes).
+Output written on main.pdf (3 pages, 157495 bytes).
 PDF statistics:
  75 PDF objects out of 1000 (max. 8388607)
  54 compressed objects within 1 object stream
