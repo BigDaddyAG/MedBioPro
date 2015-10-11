@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.9.22)  6 OCT 2015 18:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.9.22)  11 OCT 2015 15:52
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -340,6 +340,12 @@ runsystem(mkdir -p "_minted-main")...executed.
 
 
 (./_minted-main/default.pygstyle)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks34
+\verbatim@line=\toks35
+\verbatim@in@stream=\read3
+)
 runsystem(which "pygmentize" && touch "main.aex")...executed.
 
 runsystem(rm "main.aex")...executed.
@@ -347,20 +353,20 @@ runsystem(rm "main.aex")...executed.
  (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
-LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 7.
-LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -369,12 +375,12 @@ LaTeX Font Info:    ... okay on input line 7.
 \scratchbox=\box40
 \nofMPsegments=\count127
 \nofMParguments=\count128
-\everyMPshowfont=\toks34
+\everyMPshowfont=\toks36
 \MPscratchCnt=\count129
 \MPscratchDim=\dimen134
 \MPnumerator=\count130
 \makeMPintoPDFobject=\count131
-\everyMPtoPDFconversion=\toks35
+\everyMPtoPDFconversion=\toks37
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -394,7 +400,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 (./_minted-main/default-pyg-prefix.pygstyle)
-LaTeX Font Info:    Try loading font information for LY1+phv on input line 29.
+LaTeX Font Info:    Try loading font information for LY1+phv on input line 32.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/ly1/ly1phv.fd
 File: ly1phv.fd 2001/02/01 scalable font definitions for LY1/phv using Berry na
@@ -409,7 +415,7 @@ f>
 (epstopdf)                    size: 9269 bytes
 (epstopdf)             Command: <epstopdf --outfile=OUP_First_SBk_Bot_8401-eps-
 converted-to.pdf OUP_First_SBk_Bot_8401.eps>
-(epstopdf)             \includegraphics on input line 29.
+(epstopdf)             \includegraphics on input line 32.
 Package epstopdf Info: Output file is already uptodate.
 
 <OUP_First_SBk_Bot_8401-eps-converted-to.pdf, id=1, 54.2025pt x 54.2025pt>
@@ -417,83 +423,83 @@ File: OUP_First_SBk_Bot_8401-eps-converted-to.pdf Graphic file (type pdf)
 
 <use OUP_First_SBk_Bot_8401-eps-converted-to.pdf>
 Package pdftex.def Info: OUP_First_SBk_Bot_8401-eps-converted-to.pdf used on in
-put line 29.
+put line 32.
 (pdftex.def)             Requested size: 54.20236pt x 54.20236pt.
 LaTeX Font Info:    Font shape `LY1/phv/bx/n' in size <8> not available
-(Font)              Font shape `LY1/phv/b/n' tried instead on input line 29.
+(Font)              Font shape `LY1/phv/b/n' tried instead on input line 32.
 LaTeX Font Info:    Font shape `LY1/phv/bx/n' in size <18> not available
-(Font)              Font shape `LY1/phv/b/n' tried instead on input line 29.
+(Font)              Font shape `LY1/phv/b/n' tried instead on input line 32.
 LaTeX Font Info:    Font shape `LY1/phv/bx/n' in size <12> not available
-(Font)              Font shape `LY1/phv/b/n' tried instead on input line 29.
-LaTeX Font Info:    Try loading font information for U+msa on input line 29.
+(Font)              Font shape `LY1/phv/b/n' tried instead on input line 32.
+LaTeX Font Info:    Try loading font information for U+msa on input line 32.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 29.
+LaTeX Font Info:    Try loading font information for U+msb on input line 32.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `LY1/phv/bx/n' in size <9> not available
-(Font)              Font shape `LY1/phv/b/n' tried instead on input line 29.
+(Font)              Font shape `LY1/phv/b/n' tried instead on input line 32.
 LaTeX Font Info:    Font shape `LY1/phv/bx/n' in size <7> not available
-(Font)              Font shape `LY1/phv/b/n' tried instead on input line 29.
+(Font)              Font shape `LY1/phv/b/n' tried instead on input line 32.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <6.5> not available
-(Font)              size <6> substituted on input line 29.
+(Font)              size <6> substituted on input line 32.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <6.5> not available
-(Font)              size <6> substituted on input line 29.
+(Font)              size <6> substituted on input line 32.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <6.5> not available
-(Font)              size <6> substituted on input line 29.
+(Font)              size <6> substituted on input line 32.
 
-LaTeX Font Info:    Calculating math sizes for size <8.5> on input line 29.
+LaTeX Font Info:    Calculating math sizes for size <8.5> on input line 32.
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <8.5> not available
-(Font)              size <8> substituted on input line 29.
+(Font)              size <8> substituted on input line 32.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.25> not available
-(Font)              size <5> substituted on input line 29.
+(Font)              size <5> substituted on input line 32.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <8.5> not available
-(Font)              size <8> substituted on input line 29.
+(Font)              size <8> substituted on input line 32.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.25> not available
-(Font)              size <5> substituted on input line 29.
+(Font)              size <5> substituted on input line 32.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <8.5> not available
-(Font)              size <8> substituted on input line 29.
+(Font)              size <8> substituted on input line 32.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.25> not available
-(Font)              size <5> substituted on input line 29.
+(Font)              size <5> substituted on input line 32.
 
 LaTeX Font Info:    Font shape `LY1/phv/bx/n' in size <10> not available
-(Font)              Font shape `LY1/phv/b/n' tried instead on input line 29.
+(Font)              Font shape `LY1/phv/b/n' tried instead on input line 32.
 LaTeX Font Info:    Font shape `LY1/phv/m/it' in size <9> not available
-(Font)              Font shape `LY1/phv/m/sl' tried instead on input line 29.
+(Font)              Font shape `LY1/phv/m/sl' tried instead on input line 32.
 
-Underfull \hbox (badness 10000) in paragraph at lines 29--29
+Underfull \hbox (badness 10000) in paragraph at lines 32--32
 \LY1/phv/b/n/9 Availability: \LY1/phv/m/n/9 All data we used is available in ou
 r GitHub repository under:
  []
 
 
-Underfull \hbox (badness 10000) detected at line 29
+Underfull \hbox (badness 10000) detected at line 32
 []
  []
 
 
-Underfull \hbox (badness 4429) in paragraph at lines 65--66
+Underfull \hbox (badness 4429) in paragraph at lines 68--69
 []\LY1/ptm/m/n/8 The second archive which is provided by the \LY1/ptm/m/it/8 Bi
 ospecimen
  []
@@ -512,7 +518,7 @@ Overfull \hbox (1.12001pt too wide) has occurred while \output is active
 
  <./OUP_First_SBk_Bot_8401-eps-converted-to.pdf>]
 LaTeX Font Info:    Font shape `LY1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `LY1/ptm/b/n' tried instead on input line 75.
+(Font)              Font shape `LY1/ptm/b/n' tried instead on input line 78.
 \openout3 = `main.pyg'.
 
 
@@ -543,7 +549,7 @@ LaTeX Font Info:    Font shape `LY1/pcr/bx/n' in size <8> not available
 
 (./_minted-main/A65FF54B2A9E1198173495219C3B23EAF16A92EBBA8182EFC69DB93A2CED7F7
 0.pygtex)
-Overfull \hbox (1.20015pt too wide) in paragraph at lines 139--139
+Overfull \hbox (1.20015pt too wide) in paragraph at lines 141--141
 []\LY1/pcr/m/n/8 nationwidechildrens.org_clinical_patient_luad.txt[] 
  []
 
@@ -562,78 +568,29 @@ Overfull \hbox (1.20015pt too wide) in paragraph at lines 139--139
 
 (./_minted-main/68B8B58A9DB5EAE93044FE677BF2945FF16A92EBBA8182EFC69DB93A2CED7F7
 0.pygtex)
-Underfull \hbox (badness 1019) in paragraph at lines 146--149
+Underfull \hbox (badness 1019) in paragraph at lines 149--152
 \LY1/ptm/m/n/8 an own one that reads in every file as an input split record and
 
  []
 
 LaTeX Font Info:    Font shape `LY1/phv/m/it' in size <8> not available
-(Font)              Font shape `LY1/phv/m/sl' tried instead on input line 170.
+(Font)              Font shape `LY1/phv/m/sl' tried instead on input line 206.
 
 Overfull \hbox (252.0pt too wide) has occurred while \output is active
 [][] 
  []
 
 [2]
-Overfull \hbox (1.0pt too wide) in paragraph at lines 174--176
-[][][][][][][] 
- []
-
-LaTeX Font Info:    Try loading font information for LY1+phb on input line 176.
-
-LaTeX Font Info:    No file LY1phb.fd. on input line 176.
-
-LaTeX Font Warning: Font shape `LY1/phb/m/n' undefined
-(Font)              using `LY1/ptm/m/n' instead on input line 176.
-
-LaTeX Font Info:    Font shape `LY1/phv/bx/n' in size <6.5> not available
-(Font)              Font shape `LY1/phv/b/n' tried instead on input line 176.
-
-LaTeX Warning: Reference `fig:02' on page 3 undefined on input line 186.
-
-
-LaTeX Warning: Reference `fig:02' on page 3 undefined on input line 191.
-
-
-LaTeX Warning: Reference `fig:02' on page 3 undefined on input line 196.
-
-
-LaTeX Warning: Reference `fig:02' on page 3 undefined on input line 203.
-
-
-LaTeX Warning: Reference `fig:02' on page 3 undefined on input line 208.
-
-
-LaTeX Warning: Reference `fig:02' on page 3 undefined on input line 213.
-
-
-LaTeX Warning: Reference `fig:02' on page 3 undefined on input line 225.
-
-
-LaTeX Warning: Reference `fig:02' on page 3 undefined on input line 230.
-
-
-LaTeX Warning: Reference `Tab:01' on page 3 undefined on input line 238.
-
-
-LaTeX Warning: Reference `fig:02' on page 3 undefined on input line 239.
-
-
-LaTeX Warning: Reference `fig:02' on page 3 undefined on input line 241.
-
-
-LaTeX Warning: Reference `fig:02' on page 3 undefined on input line 243.
-
 LaTeX Font Info:    Font shape `LY1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `LY1/ptm/b/n' tried instead on input line 305.
+(Font)              Font shape `LY1/ptm/b/n' tried instead on input line 245.
 
-Underfull \hbox (badness 10000) in paragraph at lines 320--323
+Underfull \hbox (badness 10000) in paragraph at lines 260--263
 []\LY1/ptm/m/n/7 Crenshaw, B.,III, and Jones, W.B.,Jr (2003) The future of clin
 ical
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 320--323
+Underfull \hbox (badness 10000) in paragraph at lines 260--263
 \LY1/ptm/m/n/7 cancer management: one tumor, one chip. \LY1/ptm/m/it/7 Bioinfor
 matics\LY1/ptm/m/n/7 ,
  []
@@ -658,19 +615,13 @@ runsystem(rm "main.pyg")...executed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.75pt have occurred.
 
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: There were undefined references.
-
  ) 
 Here is how much of TeX's memory you used:
- 6167 strings out of 493091
- 94442 string characters out of 6134964
- 200405 words of memory out of 5000000
- 9477 multiletter control sequences out of 15000+600000
- 57771 words of font info for 100 fonts, out of 8000000 for 9000
+ 6183 strings out of 493091
+ 94808 string characters out of 6134964
+ 200034 words of memory out of 5000000
+ 9493 multiletter control sequences out of 15000+600000
+ 55542 words of font info for 98 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
  37i,10n,28p,1006b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/ly1/texnansi.enc}</usr/lo
@@ -687,7 +638,7 @@ e1/urw/helvetic/uhvr8ac.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw
 tic/uhvro8ac.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb
 8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></u
 sr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (3 pages, 152915 bytes).
+Output written on main.pdf (3 pages, 152738 bytes).
 PDF statistics:
  76 PDF objects out of 1000 (max. 8388607)
  54 compressed objects within 1 object stream
