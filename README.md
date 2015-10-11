@@ -31,6 +31,8 @@
     * `GCC`: TCGA data from 35 patients
       * `All`: 
         - `allGccDataClean.csv`: the final TCGA table of 16 patients, which are manually joined
-    * `output`:consists of two files 
+    * `output`:contains following generated files: 
       * `somkeOutput.csv`: a table of four columns: patientID, Consent Status, end year and start year of smoking 
-	  * `joinedSomkeOutput.csv`: the previous table has been used to generateHere the third column shows how many years each patient smoked  
+	  * `joinedSomkeOutput.csv`: here the third column shows how many years each patient smoked
+  *  `Report`: the LateX and Word - report file 
+  *  `Stuff`: the Git preparation commands, related papers to this project and pictures 
