@@ -1,8 +1,6 @@
 \documentclass{bioinfo}
-\copyrightyear{2015} \pubyear{2015}
-
-\access{Advance Access Publication Date: 11 October 2015}
-\appnotes{Manuscript Category}
+\copyrightyear{2015}
+\pubyear{2015}
 
 \usepackage{minted} % for syntax highlighting
 \usepackage{verbatim} % for multiline comments
@@ -10,26 +8,31 @@
 \begin{document}
 \firstpage{1}
 
-\subtitle{Medical Bioinformatics course at Freie Universit\"at Berlin}
-
 \title[MedBioProject]{Report for the Project in Medical Bioinformatics}
-\author[Sample \textit{et~al}.]{Stefan Jacob\,$^{\text{\sfb 1,}*}$, Zarin Shakibaei\,$^{\text{\sfb 1,}*}$}
+%\subtitle{Medical Bioinformatics Course at Freie Universit\"at Berlin, Summer Term 2015}
+\author[Jacob, Shakibaei]{Stefan Jacob\,$^{1,*}$, Zarin Shakibaei\,$^{1,}$\footnote{to whom correspondence should be addressed}}
 \address{$^{\text{\sf 1}}$BigDaddyAG, Fachbereich Mathematik und Informatik, Freie Universit\"at Berlin, Takustra\ss{}e 9, 14195 Berlin, Germany}
-
-\corresp{$^\ast$To whom correspondence should be addressed.}
 
 \history{Received on XXXXX; revised on XXXXX; accepted on XXXXX}
 
 \editor{Associate Editor: Tim Conrad}
 
-\abstract{\textbf{Motivation:} As the amount of biological data has recently increased due to new and enhanced techniques like next-generation sequencing, the analysis of this data also needs to improve and especially speed up. As a result, new frameworks and platforms for distributed stream and batch data processing are evolving. In a university project, we developed a pipeline for the analysis of biological data from \emph{The Cancer Genome Atlas (TCGA)} data portal, which provides - among others - the access to data from high level sequence analysis of tumor genomes. In this report we present the used methods and discuss their results.\\
-\textbf{Results:} No results have been achieved yet.\\
-\textbf{Availability:} All data we used is available in our GitHub repository under: \href{https://github.com/BigDaddyAG/MedBioProject}{https://github.com/BigDaddyAG/MedBioProject}\\
-\textbf{Contact:} \href{stefan.jacob@fu-berlin.de}{stefan.jacob@fu-berlin.de} and \href{zarin.shakibaei@fu-berlin.de}{zarin.shakibaei@fu-berlin.de}\\
-\textbf{Supplementary information:} Supplementary data are available at \textit{Bioinformatics}
-online.}
-
 \maketitle
+
+\begin{abstract}
+
+\section{Motivation:}
+As the amount of biological data has recently increased due to new and enhanced techniques like next-generation sequencing, the analysis of this data also needs to improve and especially speed up. As a result, new frameworks and platforms for distributed stream and batch data processing are evolving. In a university project, we developed a pipeline for the analysis of biological data from \emph{The Cancer Genome Atlas (TCGA)} data portal, which provides - among others - the access to data from high level sequence analysis of tumor genomes. In this report we present the used methods and discuss their results.
+
+\section{Results:}
+n/a
+
+\section{Availability:}
+All data we used is available in our GitHub repository under: \href{https://github.com/BigDaddyAG/MedBioProject}{https://github.com/BigDaddyAG/MedBioProject}
+
+\section{Contact:}
+\href{stefan.jacob@fu-berlin.de}{stefan.jacob@fu-berlin.de} and \href{zarin.shakibaei@fu-berlin.de}{zarin.shakibaei@fu-berlin.de}
+\end{abstract}
 
 \section{Introduction}
 
@@ -37,7 +40,7 @@ As a summarizing project of our course "Big Data in Life Sciences" we were asked
 
 This is our story of the failures, frustrations and all issues we faced... 
 
-%\enlargethispage{12pt}
+
 
 \section{Approach}
 
@@ -68,6 +71,7 @@ The first archive comes from the \emph{Genome Characterization Center (GCC)} and
 The second archive which is provided by the \emph{Biospecimen Core Resource (BCR)} contains carefully cataloged tissue and sample information with important medical information about the patient. Each text file from the BCR contains other information e.g. the gender of the patient or the treatment, used drugs and some information about the tumor (size, site, location, etc.)
 
 As mentioned previously, the downloaded GCC-Data folder contains 35 text files, each referring to one patient. The first column contains all Genes from a microarry chip, the second column describes expression levels corresponding to each gene.
+
 
 
 \begin{methods}
@@ -165,38 +169,9 @@ The goal here was to use an appropriate input data and train Flink ML (SVM) and 
 
 We could present the ML-API with example inputs of patients who smoked longer than 30 years and died of lung cancer (death as a desired output) and the ML could learn a general rule that maps patients to appropriate consent status.
 
-%TODO: insert code and screenshots here.
-
-
 \end{methods}
 
-\begin{comment}
-\begin{figure}[!tpb]%figure1
-\fboxsep=0pt\colorbox{gray}{\begin{minipage}[t]{235pt} \vbox to 100pt{\vfill\hbox to
-235pt{\hfill\fontsize{24pt}{24pt}\selectfont FPO\hfill}\vfill}
-\end{minipage}}
-%\centerline{\includegraphics{fig01.eps}}
-\caption{Caption, caption.}\label{fig:01}
-\end{figure}
-%\begin{figure}[!tpb]%figure2
-%%\centerline{\includegraphics{fig02.eps}}
-%\caption{Caption, caption.}\label{fig:02}
-%\end{figure}
-\end{comment}
-
-
 \section{Discussion}
-
-
-adsf
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%     please remove the " % " symbol from \centerline{\includegraphics{fig01.eps}}
-%     as it may ignore the figures.
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -204,6 +179,7 @@ adsf
 
 
 \section{Conclusion}
+
 
 This project was harsh!
 
@@ -219,14 +195,11 @@ Furthermore, while talking to the Flink developers, we got to know that their ch
 This all sums up in the conclusion that we wouldn't recommend Flink for the creation of a pipeline for analyzing genomic or medical data (quod erat demonstrandum?). The Flink developers even encouraged us to do the pipeline completely without Flink and only in Scala.
 
 
-\section*{Acknowledgements}
 
-Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text
-text text text\vspace*{-12pt}
+\section*{Acknowledgement}
+Text Text Text Text Text Text  Text Text.  \citealp{Boffelli03} might want to know about  text text text text
 
-\section*{Funding}
-
-This work has been supported by the... Text Text  Text Text.\vspace*{-12pt}
+\paragraph{Funding\textcolon} Text Text Text Text Text Text  Text Text.
 
 %\bibliographystyle{natbib}
 %\bibliographystyle{achemnat}
@@ -240,12 +213,9 @@ This work has been supported by the... Text Text  Text Text.\vspace*{-12pt}
 
 
 \begin{thebibliography}{}
+\bibitem[Bofelli {\it et~al}., 2000]{Boffelli03} Bofelli,F., Name2, Name3 (2003) Article title, {\it Journal Name}, {\bf 199}, 133-154.
 
-\bibitem[Bofelli {\it et~al}., 2000]{Boffelli03}
-Bofelli,F., Name2, Name3 (2003) Article title, {\it Journal Name}, {\bf 199}, 133-154.
-
-\bibitem[Bag {\it et~al}., 2001]{Bag01}
-Bag,M., Name2, Name3 (2001) Article title, {\it Journal Name}, {\bf 99}, 33-54.
+\bibitem[Bag {\it et~al}., 2001]{Bag01} Bag,M., Name2, Name3 (2001) Article title, {\it Journal Name}, {\bf 99}, 33-54.
 
 \bibitem[Yoo \textit{et~al}., 2003]{Yoo03}
 Yoo,M.S. \textit{et~al}. (2003) Oxidative stress regulated genes
